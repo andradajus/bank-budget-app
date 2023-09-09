@@ -7,10 +7,12 @@ const LoginForm = () => {
             <InputLoginForm
                 type="text"
                 label="Username"
+                id="username"
             />
             <InputLoginForm
                 type="password"
                 label="Password"
+                id="password"
             />
 
             <button type="button">Submit</button>
