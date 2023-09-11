@@ -1,12 +1,14 @@
 import React from 'react';
 
-const NavBar = () => {
+const NavBar = () => { 
     return (
+     <>
       <ul>
         <li>Home</li>
         <li>About</li>
         <li>Contact</li>
       </ul>
+    </> 
     );
   };
 

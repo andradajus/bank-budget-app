@@ -9,13 +9,13 @@ const LoginForm = () => {
                 label="Username"
                 id="username"
             />
-            <InputLoginForm
+            <InputLoginForm   
                 type="password"
                 label="Password"
                 id="password"
             />
-
-            <button type="button">Submit</button>
+                
+            <button type="button">Submit</button> {/* {if successful, authenticated} */}
             <button type="button">Forgot Password</button>
             <button type="button">Register</button>
         </form>

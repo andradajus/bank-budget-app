@@ -1,5 +1,5 @@
 import React from 'react';
-import React from './InputRegistrationForm'
+import InputRegistrationForm from './InputRegistrationForm'
 
 const RegistrationForm = () => {
     return (
@@ -7,33 +7,40 @@ const RegistrationForm = () => {
 
             <InputRegistrationForm
                 type="text"
-                label="Username"
+                label="Username" //required 
                 id="username"
             />
 
             <InputRegistrationForm
                 type="text"
-                label="First Name"
-                id="username"
+                label="First Name" //required
+                id="firstName"
             />
 
             <InputRegistrationForm
                 type="text"
-                label="Middle Name"
-                id="username"
+                label="Middle Name" //optional
+                id="middleName"
             />
 
             <InputRegistrationForm
                 type="text"
-                label="Username"
-                id="username"
+                label="Last Name" //required
+                id="lastName"
             />
 
             <InputRegistrationForm
                 type="text"
-                label="Username"
-                id="username"
+                label="Dito yung birthday" //dropdown
+                id="birthday"
             />
+
+            <InputRegistrationForm
+                type="text"
+                label="Dito yung country" //dropdown
+                id="country"
+            />
+
             <InputRegistrationForm
                 type="password"
                 label="Password"
@@ -42,10 +49,8 @@ const RegistrationForm = () => {
 
             <InputRegistrationForm
                 type="password"
-                label="Confirm Password"
-                id="password"
-                
-                
+                label="Confirm Password" //check password if the same
+                id="password"  
             />
           
 

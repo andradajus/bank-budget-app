@@ -1,10 +1,13 @@
 import React from 'react';
 
-const dashBoard = (props) => {
-    const { name, lastname, transHistory } = props;
+const DashBoard = (props) => {
+    const { name, firstName, transHistory } = props; //check if authenticated
 
     return (
         <>
+        <span>Hi, {firstName}</span>
         </>
     )
 }
+
+export default Dashboard; 
