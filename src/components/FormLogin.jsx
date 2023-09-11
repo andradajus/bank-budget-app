@@ -3,7 +3,6 @@ import InputLoginForm from "./InputLoginForm";
 
 const LoginForm = () => {
     const goToRegistrationPage = () => {   setCurrentPage('registration');
-};
 }
     return (
         <form>
@@ -20,7 +19,6 @@ const LoginForm = () => {
                 
             <button type="button">Submit</button> {/* {if successful, authenticated} */}
             <button type="button">Forgot Password</button>
-            <NavBar />
             <button onClick={goToRegistrationPage}>Register</button>
         </form>
     );
