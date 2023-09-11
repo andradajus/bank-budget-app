@@ -5,11 +5,6 @@ const dashBoard = (props) => {
 
     return (
         <>
-            <ul>
-                <li>Home</li>
-                <li>Profile</li>
-                <li>Transaction History</li>
-            </ul>
         </>
     )
 }

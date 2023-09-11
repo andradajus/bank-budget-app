@@ -1,17 +1,13 @@
 import React from 'react';
 
-const navBar = (props) => {
-    const { Home, type, id } = props;
-
+const NavBar = () => {
     return (
-        <>
-            <ul>
-                <li>Home</li>
-                <li>Profile</li>
-                <li>Transaction History</li>
-            </ul>
-        </>
-    )
-}
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    );
+  };
 
-export default InputLoginForm;
+export default NavBar;
