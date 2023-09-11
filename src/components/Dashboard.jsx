@@ -1,7 +1,7 @@
 import React from 'react';
 
-const navBar = (props) => {
-    const { Home, type, id } = props;
+const dashBoard = (props) => {
+    const { name, lastname, transHistory } = props;
 
     return (
         <>
@@ -13,5 +13,3 @@ const navBar = (props) => {
         </>
     )
 }
-
-export default InputLoginForm;
