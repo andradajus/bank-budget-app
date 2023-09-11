@@ -17,13 +17,9 @@ function App() {
         <h1 className="text-3xl font-bold underline">
       Hello world!
         </h1>
+        {currentPage === 'registration' && ( <FormRegistration /> )}
           <LoginForm />
           <NavBar />
-          {currentPage === 'registration' && (
-          <RegistrationForm
-            onLoginClick={goToLoginPage}
-          />
-        )}
         </main>      
       <footer>Copyright 2023</footer>
     </div>   
