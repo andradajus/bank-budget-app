@@ -56,8 +56,7 @@ const RegistrationForm = () => {
 
 
             <button type="button">Submit</button>
-            <button type="button">Forgot Password</button>
-            <button type="button">Register</button>
+            <button type="button">Back</button>
         </form>
     );
 }

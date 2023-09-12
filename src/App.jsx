@@ -18,6 +18,7 @@ function App() {
       Hello world!
         </h1>
         {currentPage === 'registration' && ( <FormRegistration /> )}
+        
           <LoginForm />
           <NavBar />
         </main>      
