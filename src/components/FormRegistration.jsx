@@ -1,5 +1,5 @@
 import React from 'react';
-import InputRegistrationForm from './InputRegistrationForm'
+import InputRegistrationForm from './InputLabels.jsx'
 
 const RegistrationForm = () => {
     return (
@@ -37,6 +37,13 @@ const RegistrationForm = () => {
 
             <InputRegistrationForm
                 type="text"
+                label="Email Address"
+                id="email"
+            />
+
+
+            <InputRegistrationForm
+                type="text"
                 label="Dito yung country" //dropdown
                 id="country"
             />
@@ -57,7 +64,7 @@ const RegistrationForm = () => {
 
             <button type="button">Submit</button>
             <button type="button">Forgot Password</button>
-            <button type="button">Register</button>
+            <button type="button">Back</button>
         </form>
     );
 }

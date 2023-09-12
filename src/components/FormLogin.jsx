@@ -1,17 +1,18 @@
 import React from 'react';
-import InputLoginForm from "./InputLoginForm";
+import InputLabels from "./InputLabels.jsx";
+import RegistrationForm from "./FormRegistration.jsx"
 
 const LoginForm = () => {
     const goToRegistrationPage = () => {   setCurrentPage('registration');
 }
     return (
         <form>
-            <InputLoginForm
+            <InputLabels
                 type="text"
                 label="Username"
                 id="username"
             />
-            <InputLoginForm   
+            <InputLabels  
                 type="password"
                 label="Password"
                 id="password"

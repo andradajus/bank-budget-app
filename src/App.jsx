@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import LoginForm from './components/FormLogin.jsx'
 import NavBar from './components/Navbar.jsx'
+import RegistrationForm from './components/FormRegistration.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,9 +18,10 @@ function App() {
         <h1 className="text-3xl font-bold underline">
       Hello world!
         </h1>
-        {currentPage === 'registration' && ( <FormRegistration /> )}
+        {currentPage === 'registration' && ( <RegistrationForm /> )}
           <LoginForm />
           <NavBar />
+          
         </main>      
       <footer>Copyright 2023</footer>
     </div>   
