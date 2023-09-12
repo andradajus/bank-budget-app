@@ -1,8 +1,6 @@
 import React from 'react';
 
-const InputLoginForm = (props) => {
-    const { label, type, id } = props;
-
+const InputLabels = ({label, type, id}) => {
     return (
         <>
             <label>{label}</label>
@@ -15,4 +13,5 @@ const InputLoginForm = (props) => {
     )
 }
 
-export default InputLoginForm;
+
+export default InputLabels;
