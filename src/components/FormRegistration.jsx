@@ -3,7 +3,7 @@ import InputRegistrationForm from './InputLabels.jsx'
 
 const RegistrationForm = () => {
     return (
-        <form>
+        <form className="flex flex-col">
 
             <InputRegistrationForm
                 type="text"
@@ -62,9 +62,8 @@ const RegistrationForm = () => {
           
 
 
-            <button type="button">Submit</button>
+            <button type="button">Register</button>
             <button type="button">Forgot Password</button>
-            <button type="button">Back</button>
         </form>
     );
 }

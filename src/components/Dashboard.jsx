@@ -1,13 +1,19 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from "react"
 
-const DashBoard = (props) => {
-    const { name, firstName, transHistory } = props; //check if authenticated
+    const Dashboard = (props) => {
+        const { user } = props
+        const navigate = useNavigate()
+    
+    useEffect(() => {
+        if (!user) {
+          navigate('/login')
+        }
+      }, [])
 
     return (
-        <>
-        <span>Hi, {firstName}</span>
-        </>
+   <div>Welcome {user?.firstName || ''}!</div>
     )
 }
 
-export default Dashboard; 
+export default Dashboard
