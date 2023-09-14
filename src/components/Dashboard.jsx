@@ -12,7 +12,7 @@ import { useEffect } from "react"
       }, [])
 
     return (
-   <div className="text-3xl font-bold underline">Welcome {user?.firstName || ''}!</div>
+   <div className="text-3xl font-bold underline">Welcome {user?.firstName}!</div>
     )
 }
 

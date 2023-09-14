@@ -42,6 +42,7 @@ const Login = (props) => {
   }
 
   return (
+  <div className="justify-center">
     <form onSubmit={onSubmitLogin} className="flex flex-col gap-10">
       <div className="flex flex-col">
         <label>Username</label>
@@ -63,6 +64,7 @@ const Login = (props) => {
       <button type="submit">Forgot Password</button>
       <button type="submit" onClick={() => navigate('/Register')}>Register</button>
     </form>
+  </div>
   )
 }
 

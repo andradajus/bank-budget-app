@@ -1,10 +1,16 @@
 import React from 'react';
 import {useState, useEffect} from 'react'
 import Inputs from './Inputs.jsx'
+import SelectCountry from './ZFunctionalComponent/SelectCountry.jsx'
 
 const RegistrationForm = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [selectCountry, setCountry] = useState('')
+
+    const handleCountryChange = (e) => {
+        setCountry(e.target.value);
+      };
 
     const handlePasswordChange  = (e) => {
         setPassword(e.target.value)
@@ -26,27 +32,28 @@ const RegistrationForm = () => {
      }
 
     return (
-    <>
         <form className="flex flex-col" onSubmit={handleSubmit}>
 
         <label>Username<span className="text-red-600">*</span></label>
             <input
                 type="text"
-                label="Username" //required 
+                label="Username"
                 id="username"
+                required
             />
 
             <label>First Name<span className="text-red-600">*</span></label>
             <input
                 type="text"
-                label="First Name" //required
+                label="First Name"
                 id="firstName"
+                required
             />
 
             <label>Middle Name<span className="text-red-600">*</span></label>
             <input
                 type="text"
-                label="Middle Name" //optional
+                label="Middle Name" 
                 id="middleName"
             />
 
@@ -74,13 +81,7 @@ const RegistrationForm = () => {
                 required
             />
 
-            <label>Country<span className="text-red-600">*</span></label>
-            <input
-                type="text"
-                label="Dito yung country" 
-                id="country"
-                required
-            />
+            <SelectCountry value={selectCountry} onChange={handleCountryChange} />
 
             <label>Password<span className="text-red-600">*</span></label>
             <input
@@ -106,8 +107,7 @@ const RegistrationForm = () => {
 
             <button type="submit">Register</button>
             <button type="button">Forgot Password</button>
-        </form>
-    </>    
+        </form>  
     );
 }
 

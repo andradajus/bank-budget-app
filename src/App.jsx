@@ -26,6 +26,11 @@ function App() {
   return (
     <div className="flex flex-col border-solid border-2 p-10">
       <main>
+      <div className="bg-red-300">Alert/Header Here</div>
+      <div className="bg-orange-300">Navbar Here</div>
+      <div className="bg-amber-300">Display Name and Bank Account Number here</div>
+      <div className="bg-lime-300"></div>
+      <div className="bg-blue-300"><span>Base</span>
         <h1 className="text-3xl font-bold underline">Tailwind Test</h1>
         <BrowserRouter>
           <Routes>
@@ -35,6 +40,8 @@ function App() {
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </BrowserRouter>
+      </div>
+      <div className="bg-fuchsia-300">footer here</div>
       </main>      
     </div>   
   )
