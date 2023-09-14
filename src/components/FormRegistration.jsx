@@ -1,71 +1,114 @@
 import React from 'react';
-import InputRegistrationForm from './InputLabels.jsx'
+import {useState, useEffect} from 'react'
+import Inputs from './Inputs.jsx'
 
 const RegistrationForm = () => {
-    return (
-        <form className="flex flex-col">
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
 
-            <InputRegistrationForm
+    const handlePasswordChange  = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    
+
+         if(password !== confirmPassword) {
+         console.log('Password does not match')
+            return;
+         }
+         console.log('Success')
+     }
+
+    return (
+    <>
+        <form className="flex flex-col" onSubmit={handleSubmit}>
+
+        <label>Username<span className="text-red-600">*</span></label>
+            <input
                 type="text"
                 label="Username" //required 
                 id="username"
             />
 
-            <InputRegistrationForm
+            <label>First Name<span className="text-red-600">*</span></label>
+            <input
                 type="text"
                 label="First Name" //required
                 id="firstName"
             />
 
-            <InputRegistrationForm
+            <label>Middle Name<span className="text-red-600">*</span></label>
+            <input
                 type="text"
                 label="Middle Name" //optional
                 id="middleName"
             />
 
-            <InputRegistrationForm
+            <label>Last Name<span className="text-red-600">*</span></label>
+            <input
                 type="text"
-                label="Last Name" //required
+                label="Last Name"
                 id="lastName"
+                required
             />
 
-            <InputRegistrationForm
+            <label>Birth Date<span className="text-red-600">*</span></label>
+            <input
                 type="text"
                 label="Dito yung birthday" //dropdown
                 id="birthday"
+                required
             />
 
-            <InputRegistrationForm
-                type="text"
+            <label>Email Address<span className="text-red-600">*</span></label>
+            <input
+                type="email"
                 label="Email Address"
                 id="email"
+                required
             />
 
-
-            <InputRegistrationForm
+            <label>Country<span className="text-red-600">*</span></label>
+            <input
                 type="text"
-                label="Dito yung country" //dropdown
+                label="Dito yung country" 
                 id="country"
+                required
             />
 
-            <InputRegistrationForm
+            <label>Password<span className="text-red-600">*</span></label>
+            <input
                 type="password"
                 label="Password"
                 id="password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
             />
 
-            <InputRegistrationForm
+            <label>Confirm Password<span className="text-red-600">*</span></label>
+            <input
                 type="password"
-                label="Confirm Password" //check password if the same
-                id="password"  
+                label="Confirm Password" 
+                id="confirmPassword"  
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+                required
             />
           
 
 
-            <button type="button">Register</button>
+            <button type="submit">Register</button>
             <button type="button">Forgot Password</button>
         </form>
+    </>    
     );
 }
 
-export default RegistrationForm;
+export default RegistrationForm
