@@ -1,10 +1,9 @@
 import React from 'react';
-import {useState, useEffect} from 'react'
-import Inputs from './Inputs.jsx'
+import {useState} from 'react'
 import SelectCountry from './ZFunctionalComponent/SelectCountry.jsx'
 import { useNavigate } from 'react-router-dom'
 
-const RegistrationForm = ({handleNewUserRegistration}) => {
+const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [selectCountry, setCountry] = useState('')
@@ -56,10 +55,12 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
         e.preventDefault()
     
          if(password !== confirmPassword) {
-         console.log('Password does not match') //for alerts
+          showAlert('Password does not match', 'error')
             return
          }
-         console.log('Success')
+         
+         console.log('success')
+         
          const randomEightDigitNumber = Math.floor(10000000 + Math.random() * 90000000)
 
     
@@ -76,10 +77,12 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
             balanceSavings: 0, 
             bankNumberC: '', 
             balanceChecking: 0, 
-          }
+          } 
 
         handleNewUserRegistration(formData)
         navigate('/login')
+        showAlert('Registration Successful. You may now login', 'success')
+        
     }
 
     return (

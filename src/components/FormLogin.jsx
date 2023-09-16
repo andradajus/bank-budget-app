@@ -3,19 +3,19 @@ import { useEffect, useState } from 'react'
 
 const Login = (props) => {
   const { setCurrentPage, setLoggedInUser } = props
+  const showAlert = (message, type) => {
+    props.showAlert(message, type)
+  }
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
-  const [usernameErrorMessage, setUsernameErrorMessage] = useState('')
   const [password, setPassword] = useState('')
-  const [passwordErrorMessage, setPasswordErrorMessage] = useState('')
+
 
   const onChangeUsername = (e) => setUsername(e.target.value)
   const onChangePassword = (e) => setPassword(e.target.value)
 
   const onSubmitLogin = (e) => {
     e.preventDefault()
-    setUsernameErrorMessage('')
-    setPasswordErrorMessage('')
 
 
     const accounts = JSON.parse(localStorage.getItem('accounts'))
@@ -23,20 +23,20 @@ const Login = (props) => {
     const selectedAccount = accounts.find(account => username === account.username)
 
     if (!selectedAccount) {
-      setUsernameErrorMessage('User does not exist')
+      showAlert('User does not exist', 'error')
       return
     }
 
     if (selectedAccount?.password !== password) {
-      setPasswordErrorMessage('Username and password does not match')
+      showAlert('Username and password does not match', 'error')
       return
     }
 
     if (selectedAccount.password === password) {
       setLoggedInUser(selectedAccount)
       navigate('/home')
-      setUsernameErrorMessage('')
-      setPasswordErrorMessage('')
+
+      showAlert('Login successful!', 'success')
       return
     }
   }
@@ -46,17 +46,11 @@ const Login = (props) => {
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">Username</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value={username} onChange={onChangeUsername} />
-        {usernameErrorMessage && (
-          <small className="text-red-700">{usernameErrorMessage}</small>
-        )}
       </div>
       
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" >
         <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" value={password} onChange={onChangePassword} />
-        {passwordErrorMessage && (
-          <small className="text-red-700">{passwordErrorMessage}</small>
-        )}
       </div>
       
       <div className="flex items-center justify-between">

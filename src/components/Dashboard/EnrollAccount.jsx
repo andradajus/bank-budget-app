@@ -1,8 +1,11 @@
+import SideBar from '../SideBar'
 import { useNavigate } from 'react-router-dom'
 
 const EnrollAccount = ({ user }) => {
     const navigate= useNavigate()
   return (
+  <>
+    <SideBar />
     <div>
       <h2>Enroll Account</h2>
       <div>
@@ -26,6 +29,7 @@ const EnrollAccount = ({ user }) => {
         Back
       </button>
     </div>
+  </>
   )
 }
 

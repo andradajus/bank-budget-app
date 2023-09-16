@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react'
 import './index.css'
 import Login from './components/FormLogin.jsx'
-import NavBar from './components/Navbar.jsx'
 import RegistrationForm from './components/FormRegistration.jsx'
 import Dashboard from './components/Dashboard.jsx'
-import AccountBalance from './components/Dashboard/AccountBalance'
-import EnrollAccount from './components/Dashboard/EnrollAccount'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import AlertComponent from './components/AlertBox.jsx'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
 function App() {
   useEffect(() => {
@@ -25,39 +23,54 @@ function App() {
         balanceChecking:99999999.99,
       }
     ]
-    
+  
     localStorage.setItem('accounts', JSON.stringify(registeredAccounts))
   }, [])
 
   const handleNewUserRegistration = (formData) => {
   const accountData = JSON.parse(localStorage.getItem('accounts')) || []
   const newData = [...accountData, formData]
-
   localStorage.setItem('accounts', JSON.stringify(newData))
 }
-
+  const [alert, setAlert] = useState(null);
   const [currentPage, setCurrentPage] = useState('login')
   const [loggedInUser, setLoggedInUser] = useState(null)
 
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+    setTimeout(() => {
+      setAlert(null);
+    }, 3000);
+  };
+
+
   return (
-  <>
-    <div className="flex flex-col border-solid border-2 w-screen h-screen bg-red-300 justify-center items-center">
-      <main>
-        <BrowserRouter>
-          <Routes>
-          <Route path="/register" element={<RegistrationForm handleNewUserRegistration={handleNewUserRegistration} />} />
-            <Route path="/home" element={<Dashboard user={loggedInUser} />} />
-            <Route path="/login" element={<Login setCurrentPage={setCurrentPage} setLoggedInUser={setLoggedInUser} />} />
-            <Route path="*" element={<Navigate to="/login" />} />
-            <Route path="/account-balance" element={<AccountBalance user={loggedInUser} />} />
-            <Route path="/enroll-account" element={<EnrollAccount user={loggedInUser} />} />
-          </Routes>
-        </BrowserRouter>
-      </main>
+    <>
+      <div className="flex flex-col border-solid border-2 w-screen h-screen bg-slate-100 justify-center items-center">
+        <main>
+          {alert && <AlertComponent message={alert.message} type={alert.type} />}
+          <Router>
+            <Routes>
+              <Route
+                path="/register"
+                element={<RegistrationForm handleNewUserRegistration={handleNewUserRegistration} showAlert={showAlert} />}
+              />
+              <Route
+                path="/home/*"
+                element={<Dashboard user={loggedInUser} />}
+              />
+              <Route
+                path="login"
+                element={<Login setCurrentPage={setCurrentPage} setLoggedInUser={setLoggedInUser} showAlert={showAlert} />}
+              />
+            </Routes>
+          </Router>
+        </main>
       </div>
-      <div className="bg-fuchsia-300">footer here</div>     
-  </>       
-  )
+      <div className="bg-fuchsia-300">footer here</div>
+    </>
+  );
 }
 
 export default App
+

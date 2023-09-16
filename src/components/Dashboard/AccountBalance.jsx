@@ -1,11 +1,13 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import SideBar from '../SideBar'
+import { useNavigate } from 'react-router-dom'
 
 const AccountBalance = ({ user }) => {
   const navigate = useNavigate()
 
   return (
     <>
+    <SideBar />
       <div>
         {user && (
           <>
