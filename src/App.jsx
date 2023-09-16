@@ -17,7 +17,8 @@ function App() {
         firstName: 'Administrator',
         middleName:'',
         LastName:'',
-        pin:'1234',
+        birthDate:'',
+        email:'',
         bankNumberS: '101-12345678-1',
         balanceSavings:99999999.99,
         bankNumberC: '101-12345678-2',
@@ -41,12 +42,7 @@ function App() {
   return (
   <>
     <div className="flex flex-col border-solid border-2 w-screen h-screen bg-red-300 justify-center items-center">
-    <div className="bg-green-300 self-start">Navbar here</div>
-      <div className="bg-orange-300">Alert/Header</div>
       <main>
-        <div className="bg-amber-300"></div>
-      <div className="bg-lime-300"></div>
-      <div className="bg-blue-300">Base</div>
         <BrowserRouter>
           <Routes>
           <Route path="/register" element={<RegistrationForm handleNewUserRegistration={handleNewUserRegistration} />} />

@@ -60,7 +60,7 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
             return
          }
          console.log('Success')
-         const randomEightDigitNumber = Math.floor(10000000 + Math.random() * 90000000);
+         const randomEightDigitNumber = Math.floor(10000000 + Math.random() * 90000000)
 
     
          const accountNumberSavings = `100-${randomEightDigitNumber}-1`;
@@ -83,14 +83,15 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
     }
 
     return (
+      <>
         <form className="flex flex-col bg-slate-200 p-7 rounded" onSubmit={handleSubmit}>
-
+        <div className="flex text-2xl align-center justify-center">Register an Account</div>
          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <label>Username<span className="text-red-600">*</span></label> 
             <input   
                 className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-red-300 invalid:text-pink-300
-                focus:invalid:border-pink-300 focus:invalid:ring-pink-300"                                                   //for polishing: add validation of repeated on local storage
+                invalid:border-red-300 invalid:text-red-300
+                focus:invalid:border-red-300 focus:invalid:ring-red-300"                                                   //for polishing: add validation of repeated on local storage
                  type="text"
                  label="Username"
                  id="username"
@@ -105,8 +106,8 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
             <label>First Name<span className="text-red-600">*</span></label>
             <input
                 className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-red-300 invalid:text-pink-300
-                focus:invalid:border-pink-300 focus:invalid:ring-pink-300" 
+                invalid:border-red-300 invalid:text-red-300
+                focus:invalid:border-red-300 focus:invalid:ring-red-300" 
                 type="text"                                     
                 label="First Name"
                 id="firstName"
@@ -133,8 +134,8 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
             <label>Last Name<span className="text-red-600">*</span></label>
             <input
                 className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-red-300 invalid:text-pink-300
-                focus:invalid:border-pink-300 focus:invalid:ring-pink-300" 
+                invalid:border-red-300 invalid:text-red-300
+                focus:invalid:border-red-300 focus:invalid:ring-red-300"
                 type="text"
                 label="Last Name"
                 id="lastName"
@@ -146,26 +147,11 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
         </div>
 
           <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <label>Birth Date<span className="text-red-600">*</span></label>
-            <input 
-                 className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                 invalid:border-red-300 invalid:text-pink-300
-                 focus:invalid:border-pink-300 focus:invalid:ring-pink-300"                                                             // for polishing: add a drop downbox with validation on age 18 and below
-                 type="text"
-                 label="Dito yung birthday"
-                 id="birthday"
-                 value={birthDate}
-                 onChange={handleBirthDateChange}
-                 required
-            />
-          </div>
-
-          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <label>Email Address<span className="text-red-600">*</span></label>
             <input
                 className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-red-300 invalid:text-pink-300
-                focus:invalid:border-pink-300 focus:invalid:ring-pink-300" 
+                invalid:border-red-300 invalid:text-red-300
+                focus:invalid:border-red-300 focus:invalid:ring-red-300"
                 type="email"                                                    //for polishing: add validation of repeated on local storage
                 label="Email Address"
                 id="email"
@@ -175,16 +161,32 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
             />
           </div>
 
-          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <SelectCountry value={selectCountry} onChange={handleCountryChange} />
+          <div className="flex flew-row justify-between bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div>
+            <label>Birth Date<span className="text-red-600">*</span></label>
+            <select
+                  className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                  invalid:border-red-300 invalid:text-red-300
+                  focus:invalid:border-red-300 focus:invalid:ring-red-300"                                                         // for polishing: add a drop downbox with validation on age 18 and below
+                 type="text"
+                 label="Dito yung birthday"
+                 id="birthday"
+                 value={birthDate}
+                 onChange={handleBirthDateChange}
+                 required
+            />
+
+          </div>
+         
+          <div><SelectCountry value={selectCountry} onChange={handleCountryChange} /></div>
           </div>
 
           <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <label>Password<span className="text-red-600">*</span></label>
             <input
                 className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-red-300 invalid:text-pink-300
-                focus:invalid:border-pink-300 focus:invalid:ring-pink-300" 
+                invalid:border-red-300 invalid:text-red-300
+                focus:invalid:border-red-300 focus:invalid:ring-red-300" 
                 type="password"
                 label="Password"
                 id="password"
@@ -198,8 +200,8 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
             <label>Confirm Password<span className="text-red-600">*</span></label>
             <input
                 className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-red-300 invalid:text-pink-300
-                focus:invalid:border-pink-300 focus:invalid:ring-pink-300" 
+                invalid:border-red-300 invalid:text-red-300
+                focus:invalid:border-red-300 focus:invalid:ring-red-300" 
                 type="password"
                 label="Confirm Password" 
                 id="confirmPassword"  
@@ -215,7 +217,8 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Forgot Password</button>
           </div>
         </form>  
-    );
+      </> 
+    )
 }
 
 export default RegistrationForm
