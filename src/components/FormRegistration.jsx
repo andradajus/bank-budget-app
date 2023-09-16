@@ -56,7 +56,7 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
         e.preventDefault()
     
          if(password !== confirmPassword) {
-         console.log('Password does not match')
+         console.log('Password does not match') //for alerts
             return
          }
          console.log('Success')
@@ -83,10 +83,14 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
     }
 
     return (
-        <form className="flex flex-col" onSubmit={handleSubmit}>
+        <form className="flex flex-col bg-slate-200 p-7 rounded" onSubmit={handleSubmit}>
 
+         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <label>Username<span className="text-red-600">*</span></label> 
-            <input                                                      //for polishing: add validation of repeated on local storage
+            <input   
+                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                invalid:border-red-300 invalid:text-pink-300
+                focus:invalid:border-pink-300 focus:invalid:ring-pink-300"                                                   //for polishing: add validation of repeated on local storage
                  type="text"
                  label="Username"
                  id="username"
@@ -94,9 +98,15 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
                  onChange={handleUsernameChange}
                  required
             />
+          </div> 
 
+        <div className="flex flew-row">
+          <div className="bg-white shadow-md rounded px-4 pt-3 pb-8 mb-4">
             <label>First Name<span className="text-red-600">*</span></label>
             <input
+                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                invalid:border-red-300 invalid:text-pink-300
+                focus:invalid:border-pink-300 focus:invalid:ring-pink-300" 
                 type="text"                                     
                 label="First Name"
                 id="firstName"
@@ -104,18 +114,27 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
                 onChange={handleFirstNameChange}
                 required
             />
+          </div>
 
-            <label>Middle Name<span className="text-red-600">*</span></label>
+          <div className="bg-white shadow-md rounded px-4 pt-3 pb-8 mb-4">
+            <label>Middle Name</label>
             <input
+                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
                 type="text"
                 label="Middle Name"
                 id="middleName"
                 value={middleName}
                 onChange={handleMiddleNameChange}
             />
+          </div>
 
+
+          <div className="bg-white shadow-md rounded px-4 pt-3 pb-8 mb-4">
             <label>Last Name<span className="text-red-600">*</span></label>
             <input
+                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                invalid:border-red-300 invalid:text-pink-300
+                focus:invalid:border-pink-300 focus:invalid:ring-pink-300" 
                 type="text"
                 label="Last Name"
                 id="lastName"
@@ -123,9 +142,15 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
                 onChange={handleLastNameChange}
                 required
             />
+          </div>
+        </div>
 
+          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <label>Birth Date<span className="text-red-600">*</span></label>
-            <input                                                             // for polishing: add a drop downbox with validation on age 18 and below
+            <input 
+                 className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                 invalid:border-red-300 invalid:text-pink-300
+                 focus:invalid:border-pink-300 focus:invalid:ring-pink-300"                                                             // for polishing: add a drop downbox with validation on age 18 and below
                  type="text"
                  label="Dito yung birthday"
                  id="birthday"
@@ -133,9 +158,14 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
                  onChange={handleBirthDateChange}
                  required
             />
+          </div>
 
+          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <label>Email Address<span className="text-red-600">*</span></label>
             <input
+                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                invalid:border-red-300 invalid:text-pink-300
+                focus:invalid:border-pink-300 focus:invalid:ring-pink-300" 
                 type="email"                                                    //for polishing: add validation of repeated on local storage
                 label="Email Address"
                 id="email"
@@ -143,11 +173,18 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
                 onChange={handleEmailChange}
                 required
             />
+          </div>
 
+          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <SelectCountry value={selectCountry} onChange={handleCountryChange} />
+          </div>
 
+          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <label>Password<span className="text-red-600">*</span></label>
             <input
+                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                invalid:border-red-300 invalid:text-pink-300
+                focus:invalid:border-pink-300 focus:invalid:ring-pink-300" 
                 type="password"
                 label="Password"
                 id="password"
@@ -155,9 +192,14 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
                 onChange={handlePasswordChange}
                 required
             />
+          </div>
 
+          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <label>Confirm Password<span className="text-red-600">*</span></label>
             <input
+                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                invalid:border-red-300 invalid:text-pink-300
+                focus:invalid:border-pink-300 focus:invalid:ring-pink-300" 
                 type="password"
                 label="Confirm Password" 
                 id="confirmPassword"  
@@ -165,11 +207,13 @@ const RegistrationForm = ({handleNewUserRegistration}) => {
                 onChange={handleConfirmPasswordChange}
                 required
             />
+            </div>
           
 
-
-            <button type="submit" onClick={handleSubmit}>Register</button>
-            <button type="button">Forgot Password</button>
+          <div className="flex items-center justify-between">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>Register</button>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Forgot Password</button>
+          </div>
         </form>  
     );
 }

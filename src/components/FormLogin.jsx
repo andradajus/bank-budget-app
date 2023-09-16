@@ -42,8 +42,7 @@ const Login = (props) => {
   }
 
   return (
-  <div className="w-full max-w-xs">
-  <form onSubmit={onSubmitLogin} className="flex flex-col gap-10">
+  <form onSubmit={onSubmitLogin} className="bg-slate-200 rounded p-6 mt-10 w-96 max-w-xl mx-auto">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">Username</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value={username} onChange={onChangeUsername} />
@@ -66,7 +65,7 @@ const Login = (props) => {
       <button className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" type="">Forgot Password</button>
       </div>
     </form>
-  </div>
+
   )
 }
 
