@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InputLabels = ({label, type, id}) => {
+const InputLabels = ({label, type, id, value, onChange}) => {
     return (
         <>
             <label>{label}</label>
@@ -8,6 +8,8 @@ const InputLabels = ({label, type, id}) => {
                 title={label}
                 type={type}
                 id={id}
+                value={value}
+                onChange={onChange}
             />
         </>
     )

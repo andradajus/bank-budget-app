@@ -4,46 +4,63 @@ import Login from './components/FormLogin.jsx'
 import NavBar from './components/Navbar.jsx'
 import RegistrationForm from './components/FormRegistration.jsx'
 import Dashboard from './components/Dashboard.jsx'
+import AccountBalance from './components/Dashboard/AccountBalance'
+import EnrollAccount from './components/Dashboard/EnrollAccount'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 function App() {
   useEffect(() => {
-    const accounts = [
+    const registeredAccounts = [
       {
-        // bankNumber: 'branch code + 9 digits' // randomize 9 digits upon registration , branch code if luzon, 001, if visayas 002, if mindanao, 003
         username: 'admin',
         password: 'admin',
         firstName: 'Administrator',
+        middleName:'',
+        LastName:'',
+        pin:'1234',
+        bankNumberS: '101-12345678-1',
+        balanceSavings:99999999.99,
+        bankNumberC: '101-12345678-2',
+        balanceChecking:99999999.99,
       }
     ]
-
-    localStorage.setItem('accounts', JSON.stringify(accounts))
+    
+    localStorage.setItem('accounts', JSON.stringify(registeredAccounts))
   }, [])
+
+  const handleNewUserRegistration = (formData) => {
+  const accountData = JSON.parse(localStorage.getItem('accounts')) || []
+  const newData = [...accountData, formData]
+
+  localStorage.setItem('accounts', JSON.stringify(newData))
+}
 
   const [currentPage, setCurrentPage] = useState('login')
   const [loggedInUser, setLoggedInUser] = useState(null)
 
   return (
-    <div className="flex flex-col border-solid border-2 p-10">
+  <>
+    <div className="flex flex-col border-solid border-2 w-screen h-screen bg-red-300 justify-center items-center">
+    <div className="bg-green-300 self-start">Navbar here</div>
+      <div className="bg-orange-300">Alert/Header</div>
       <main>
-      <div className="bg-red-300">Alert/Header Here</div>
-      <div className="bg-orange-300">Navbar Here</div>
-      <div className="bg-amber-300">Display Name and Bank Account Number here</div>
+        <div className="bg-amber-300"></div>
       <div className="bg-lime-300"></div>
-      <div className="bg-blue-300"><span>Base</span>
-        <h1 className="text-3xl font-bold underline">Tailwind Test</h1>
+      <div className="bg-blue-300">Base</div>
         <BrowserRouter>
           <Routes>
-           <Route path="/register" element={<RegistrationForm />} />
+          <Route path="/register" element={<RegistrationForm handleNewUserRegistration={handleNewUserRegistration} />} />
             <Route path="/home" element={<Dashboard user={loggedInUser} />} />
             <Route path="/login" element={<Login setCurrentPage={setCurrentPage} setLoggedInUser={setLoggedInUser} />} />
             <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="/account-balance" element={<AccountBalance user={loggedInUser} />} />
+            <Route path="/enroll-account" element={<EnrollAccount user={loggedInUser} />} />
           </Routes>
         </BrowserRouter>
+      </main>
       </div>
-      <div className="bg-fuchsia-300">footer here</div>
-      </main>      
-    </div>   
+      <div className="bg-fuchsia-300">footer here</div>     
+  </>       
   )
 }
 
