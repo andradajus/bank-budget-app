@@ -7,7 +7,6 @@ const AccountBalance = ({ user }) => {
 
   return (
     <>
-    <SideBar />
       <div>
         {user && (
           <>

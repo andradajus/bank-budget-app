@@ -6,42 +6,47 @@ import Dashboard from './components/Dashboard.jsx'
 import AlertComponent from './components/AlertBox.jsx'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
-function App() {
-  useEffect(() => {
-    const registeredAccounts = [
-      {
-        username: 'admin',
-        password: 'admin',
-        firstName: 'Administrator',
-        middleName:'',
-        LastName:'',
-        birthDate:'',
-        email:'',
-        bankNumberS: '101-12345678-1',
-        balanceSavings:99999999.99,
-        bankNumberC: '101-12345678-2',
-        balanceChecking:99999999.99,
-      }
-    ]
+  function App() {
+    const setInitialData = () => {
+      const registeredAccounts = [
+        {
+          username: 'admin',
+          password: 'admin',
+          firstName: 'Administrator',
+          middleName: '',
+          LastName: '',
+          birthDate: '',
+          email: '',
+          bankNumberS: '101-12345678-1',
+          balanceSavings: 99999999.99,
+          bankNumberC: '101-12345678-2',
+          balanceChecking: 99999999.99,
+        },
+      ];
   
-    localStorage.setItem('accounts', JSON.stringify(registeredAccounts))
-  }, [])
+      localStorage.setItem('accounts', JSON.stringify(registeredAccounts));
+    };
+  
+    useEffect(() => {
+      setInitialData();
+    }, []);
+  
+    const handleNewUserRegistration = (formData) => {
+      const accountData = JSON.parse(localStorage.getItem('accounts')) || [];
+      const newData = [...accountData, formData];
+      localStorage.setItem('accounts', JSON.stringify(newData))
+    }
 
-  const handleNewUserRegistration = (formData) => {
-  const accountData = JSON.parse(localStorage.getItem('accounts')) || []
-  const newData = [...accountData, formData]
-  localStorage.setItem('accounts', JSON.stringify(newData))
-}
   const [alert, setAlert] = useState(null);
   const [currentPage, setCurrentPage] = useState('login')
   const [loggedInUser, setLoggedInUser] = useState(null)
 
   const showAlert = (message, type) => {
-    setAlert({ message, type });
+    setAlert({ message, type })
     setTimeout(() => {
-      setAlert(null);
-    }, 3000);
-  };
+      setAlert(null)
+    }, 3000)
+  }
 
 
   return (
@@ -59,6 +64,12 @@ function App() {
                 path="/home/*"
                 element={<Dashboard user={loggedInUser} />}
               />
+
+              <Route
+              path="*"
+              element={<Login setCurrentPage={setCurrentPage} setLoggedInUser={setLoggedInUser} showAlert={showAlert} />}
+              />
+
               <Route
                 path="login"
                 element={<Login setCurrentPage={setCurrentPage} setLoggedInUser={setLoggedInUser} showAlert={showAlert} />}
@@ -73,4 +84,3 @@ function App() {
 }
 
 export default App
-
