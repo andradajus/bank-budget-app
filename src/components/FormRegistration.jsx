@@ -2,6 +2,8 @@ import React from 'react';
 import {useState} from 'react'
 import SelectCountry from './ZFunctionalComponent/SelectCountry.jsx'
 import { useNavigate } from 'react-router-dom'
+import SelectBirthday from './ZFunctionalComponent/SelectBirthday.jsx'
+import showAlert from './AlertBox.jsx'
 
 const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
     const [password, setPassword] = useState('')
@@ -43,9 +45,6 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
         setLastName(e.target.value)
       }
     
-      const handleBirthDateChange = (e) => {
-        setBirthDate(e.target.value)
-      }
     
       const handleEmailChange = (e) => {
         setEmail(e.target.value)
@@ -89,28 +88,46 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
       <>
         <form className="flex flex-col bg-slate-200 p-7 rounded" onSubmit={handleSubmit}>
         <div className="flex text-2xl align-center justify-center">Register an Account</div>
-         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <label>Username<span className="text-red-600">*</span></label> 
-            <input   
-                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+
+        <div className="bg-white shadow-md rounded p-5 mb-4 flex w-full justify-between">
+          <div>
+              <label className="pr-2">Username<span className="text-red-600">*</span></label> 
+              <input   
+                className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                 invalid:border-red-300 invalid:text-red-300
-                focus:invalid:border-red-300 focus:invalid:ring-red-300"                                                   //for polishing: add validation of repeated on local storage
-                 type="text"
-                 label="Username"
-                 id="username"
-                 value={username}
-                 onChange={handleUsernameChange}
-                 required
+                focus:invalid:border-red-300 focus:invalid:ring-red-300"
+                type="text"
+                id="username"
+                value={username}
+                onChange={handleUsernameChange}
+                required
+              />
+          </div>
+          <div>
+            <label className="pr-2">Email Address<span className="text-red-600">*</span></label>
+            <input
+                className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline
+                 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                invalid:border-red-300 invalid:text-red-300 w-96
+                focus:invalid:border-red-300 focus:invalid:ring-red-300"
+                type="email"                                                    //for polishing: add validation of repeated on local storage
+                label="Email Address"
+                id="email"
+                value={email}
+                onChange={handleEmailChange}
+                required
             />
+          </div>
           </div> 
 
-        <div className="flex flew-row">
-          <div className="bg-white shadow-md rounded px-4 pt-3 pb-8 mb-4">
-            <label>First Name<span className="text-red-600">*</span></label>
+        <div className="bg-white shadow-md rounded p-5 mb-4 flex w-full justify-between flex-row">
+          <div>
+            <label className="pr-2">First Name<span className="text-red-600">*</span></label>
             <input
-                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-red-300 invalid:text-red-300
-                focus:invalid:border-red-300 focus:invalid:ring-red-300" 
+                className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline
+                disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+               invalid:border-red-300 invalid:text-red-300 w-50
+               focus:invalid:border-red-300 focus:invalid:ring-red-300"
                 type="text"                                     
                 label="First Name"
                 id="firstName"
@@ -120,10 +137,13 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
             />
           </div>
 
-          <div className="bg-white shadow-md rounded px-4 pt-3 pb-8 mb-4">
-            <label>Middle Name</label>
+          <div>
+            <label className="pr-2 pl-2">Middle Name</label>
             <input
-                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+                className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline
+                disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+               invalid:border-red-300 invalid:text-red-300 w-50
+               focus:invalid:border-red-300 focus:invalid:ring-red-300"
                 type="text"
                 label="Middle Name"
                 id="middleName"
@@ -133,12 +153,13 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
           </div>
 
 
-          <div className="bg-white shadow-md rounded px-4 pt-3 pb-8 mb-4">
-            <label>Last Name<span className="text-red-600">*</span></label>
+          <div>
+            <label className="pr-2 pl-2">Last Name<span className="text-red-600">*</span></label>
             <input
-                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-red-300 invalid:text-red-300
-                focus:invalid:border-red-300 focus:invalid:ring-red-300"
+                className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline
+                disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+               invalid:border-red-300 invalid:text-red-300 w-50
+               focus:invalid:border-red-300 focus:invalid:ring-red-300"
                 type="text"
                 label="Last Name"
                 id="lastName"
@@ -149,39 +170,14 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
           </div>
         </div>
 
-          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <label>Email Address<span className="text-red-600">*</span></label>
-            <input
-                className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-red-300 invalid:text-red-300
-                focus:invalid:border-red-300 focus:invalid:ring-red-300"
-                type="email"                                                    //for polishing: add validation of repeated on local storage
-                label="Email Address"
-                id="email"
-                value={email}
-                onChange={handleEmailChange}
-                required
-            />
-          </div>
+          
 
-          <div className="flex flew-row justify-between bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <div>
-            <label>Birth Date<span className="text-red-600">*</span></label>
-            <select
-                  className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                  invalid:border-red-300 invalid:text-red-300
-                  focus:invalid:border-red-300 focus:invalid:ring-red-300"                                                         // for polishing: add a drop downbox with validation on age 18 and below
-                 type="text"
-                 label="Dito yung birthday"
-                 id="birthday"
-                 value={birthDate}
-                 onChange={handleBirthDateChange}
-                 required
-            />
+          <div className="bg-white shadow-md rounded p-5 mb-4 flex w-full justify-between">
+            
 
-          </div>
-         
-          <div><SelectCountry value={selectCountry} onChange={handleCountryChange} /></div>
+      
+          <div><SelectBirthday value={birthDate} onChange={handleBirthDateChange} /></div>
+          <div><SelectCountry value={selectCountry} onChange={handleCountryChange} showAlert={showAlert} /></div>
           </div>
 
           <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">

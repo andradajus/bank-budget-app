@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 
-function SelectCountry({ value, onChange }) {
+function SelectCountry({ value, onChange, showAlert }) {
     const [countryWarning, setCountryWarning] = useState('')
 
     const handleCountryChange = (e) => {
@@ -9,7 +9,7 @@ function SelectCountry({ value, onChange }) {
     onChange(e)
       
           if (selectedCountry !== 'PH') {
-            setCountryWarning('Your country is not yet supported')
+            showAlert('Your country is not support yet', 'error')
           } else {
             setCountryWarning('')
           }
@@ -279,7 +279,6 @@ function SelectCountry({ value, onChange }) {
     <option value="ZM">Zambia</option>
     <option value="ZW">Zimbabwe</option>
 </select>
-{countryWarning && <p className="text-red-600">{countryWarning}</p>}
 </div>
 );
 }
