@@ -13,8 +13,8 @@ const SideBar = () => {
   const [currentUser, setCurrentUser] = useState('')
 
   const handleLogout = () => {
-    setCurrentUser('');
-    navigate('/login');
+    setCurrentUser('')
+    navigate('/login')
   }
   
   return (

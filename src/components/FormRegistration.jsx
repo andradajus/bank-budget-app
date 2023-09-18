@@ -64,7 +64,7 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
          const randomEightDigitNumber = Math.floor(10000000 + Math.random() * 90000000)
 
     
-         const accountNumberSavings = `100-${randomEightDigitNumber}-1`;
+         const accountNumberSavings = `100-${randomEightDigitNumber}-1`
          const formData = {
             username,
             firstName,

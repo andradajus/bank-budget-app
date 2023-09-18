@@ -16,12 +16,6 @@ import AlertComponent from './AlertBox.jsx'
           }
         }, [navigate, user])
 
-      const combinedBalance = () => {
-        if (user && user.balanceSavings && user.balanceChecking) {
-          return user.balanceSavings + user.balanceChecking
-        }
-        return 0
-      }
 
   return (
   <>
@@ -37,7 +31,10 @@ import AlertComponent from './AlertBox.jsx'
                           <div className="bg-lime-300">Welcome,</div> 
                           <div className="bg-emerald-600">{user?.firstName}!</div>
                       </div>
-                    <div className="flex self-center bg-emerald-500">&#x20B1;{combinedBalance().toFixed(2)}</div>
+                     <div className="flex flex-col">
+                    <div className="flex self-center bg-emerald-500">Savings Account:&#x20B1;{user.balanceSavings}</div>
+                    <div className="flex self-center bg-amber-500">Checking Account:&#x20B1;{user.balanceChecking}</div>
+                    </div>
                   </div>
               </div>
             </div>
@@ -51,7 +48,6 @@ import AlertComponent from './AlertBox.jsx'
           <div className="bg-cyan-300 col-span-3 col-start-2 row-start-5 h-auto">
             <div  className="flex justify-center">Transaction History</div>
             <div  className="flex justify-around">
-              <div>Transaction History</div>
               <div>Transaction Number</div>
               <div>Date</div>
               <div>Amount</div>

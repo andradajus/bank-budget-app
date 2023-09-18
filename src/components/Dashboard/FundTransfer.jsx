@@ -18,13 +18,46 @@ const FundTransfer = ({ user }) => {
       bankNumber: user ? (user.bankNumberS || '') : '',
       balance: user ? (user.balanceSavings || 0) : 0,
     }));
-  }, [user]);
+  }, [user])
 
+  const handleTransfer = () => {
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+  
+    const senderAccount = accounts.find(account => account.username === user.username);
+  
+    if (!senderAccount) {
+      console.log('Sender account not found.');
+      return;
+    }
+  
+    const senderBalance = senderAccount.accountType === 'Savings' ? senderAccount.balanceSavings : senderAccount.balanceChecking;
+    if (parseFloat(senderBalance) < parseFloat(amount)) {
+      console.log('Insufficient balance.');
+      return;
+    }
+  
+    if (senderAccount.accountType === 'Savings') {
+      senderAccount.balanceSavings = (parseFloat(senderAccount.balanceSavings) - parseFloat(amount)).toFixed(2);
+    } else {
+      senderAccount.balanceChecking = (parseFloat(senderAccount.balanceChecking) - parseFloat(amount)).toFixed(2);
+    }
+  
+    const recipientAcc = accounts.find(account => account.bankNumberS === recipientAccount);
+  
+    if (!recipientAcc) {
+      console.log('Recipient account not found.');
+      return;
+    }
 
-
+    recipientAcc.balanceSavings = (parseFloat(recipientAcc.balanceSavings) + parseFloat(amount)).toFixed(2);
+  
+    localStorage.setItem('accounts', JSON.stringify(accounts));
+  
+    console.log(`Transferred ${amount} from ${senderAccount.bankNumberS} to ${recipientAcc.bankNumberS}.`);
+  };
+  
+  
   const handleAccountValidation = () => {
-    // Placeholder logic for recipient validation
-    // Replace this with actual logic to fetch recipientInfo based on the account number
     const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
     const recipient = accounts.find((account) => account.bankNumberS === recipientAccount);
   
@@ -45,7 +78,6 @@ const FundTransfer = ({ user }) => {
 
   const handleAccountNumberInput = (e) => {
     setRecipientAccount(e.target.value);
-    // Validate recipient account when the recipient account number changes
     handleAccountValidation();
   };
 
@@ -118,7 +150,7 @@ const FundTransfer = ({ user }) => {
 
       <div>Type of Account: {recipientInfo ? recipientInfo.accountType : ''}</div>
       <div>Recipient Name: {recipientInfo ? `${recipientInfo.lastName}, ${recipientInfo.firstName}` : ''}</div>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={handleTransfer}>
         Transfer Funds
       </button>
     </>

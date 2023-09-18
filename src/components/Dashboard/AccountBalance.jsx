@@ -15,7 +15,7 @@ const AccountBalance = ({ user }) => {
             </h2>
             {user.balanceSavings !== undefined && (
               <h2 className="block text-gray-700 text-sm font-bold mb-2">
-                Savings Account Balance: &#x20B1;{user.balanceSavings.toFixed(2)}
+                Savings Account Balance: &#x20B1;{user.balanceSavings}
               </h2>
             )}
             <h2 className="block text-gray-700 text-sm font-bold mb-2">
@@ -23,7 +23,7 @@ const AccountBalance = ({ user }) => {
             </h2>
             {user.balanceChecking !== undefined && (
               <h2 className="block text-gray-700 text-sm font-bold mb-2">
-                Checking Account Balance: &#x20B1;{user.balanceChecking.toFixed(2)}
+                Checking Account Balance: &#x20B1;{user.balanceChecking}
               </h2>
             )}
           </>
