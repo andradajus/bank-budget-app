@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const FundTransfer = ({ user }) => {
+const FundTransfer = ({ user, updateBalances, balances }) => {
   const [senderAccount, setSenderAccount] = useState({
     accountType: '',
     bankNumber: '',
@@ -22,39 +22,50 @@ const FundTransfer = ({ user }) => {
 
   const handleTransfer = () => {
     const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-  
-    const senderAccount = accounts.find(account => account.username === user.username);
+    const senderAccount = accounts.find((account) => account.username === user.username);
   
     if (!senderAccount) {
       console.log('Sender account not found.');
       return;
     }
   
-    const senderBalance = senderAccount.accountType === 'Savings' ? senderAccount.balanceSavings : senderAccount.balanceChecking;
-    if (parseFloat(senderBalance) < parseFloat(amount)) {
-      console.log('Insufficient balance.');
-      return;
-    }
+    let senderBalance = parseFloat(senderAccount.balanceSavings);
   
-    if (senderAccount.accountType === 'Savings') {
-      senderAccount.balanceSavings = (parseFloat(senderAccount.balanceSavings) - parseFloat(amount)).toFixed(2);
+    if (isNaN(senderBalance) || senderBalance < parseFloat(amount)) {
+      // If savings balance is insufficient, try checking account
+      senderBalance = parseFloat(senderAccount.balanceChecking);
+  
+      if (isNaN(senderBalance) || senderBalance < parseFloat(amount)) {
+        console.log('Insufficient balance in both savings and checking accounts.');
+        return;
+      } else {
+        senderAccount.accountType = 'Checking'; // Set the account type to Checking for the transfer
+        senderAccount.balanceChecking = (senderBalance - parseFloat(amount)).toFixed(2);
+      }
     } else {
-      senderAccount.balanceChecking = (parseFloat(senderAccount.balanceChecking) - parseFloat(amount)).toFixed(2);
+      senderAccount.accountType = 'Savings'; // Set the account type to Savings for the transfer
+      senderAccount.balanceSavings = (senderBalance - parseFloat(amount)).toFixed(2);
     }
   
-    const recipientAcc = accounts.find(account => account.bankNumberS === recipientAccount);
+    const recipientAcc = accounts.find((account) => account.bankNumberS === recipientAccount);
   
     if (!recipientAcc) {
       console.log('Recipient account not found.');
       return;
     }
-
+  
     recipientAcc.balanceSavings = (parseFloat(recipientAcc.balanceSavings) + parseFloat(amount)).toFixed(2);
   
     localStorage.setItem('accounts', JSON.stringify(accounts));
   
-    console.log(`Transferred ${amount} from ${senderAccount.bankNumberS} to ${recipientAcc.bankNumberS}.`);
+    console.log(`Transferred ${amount} from ${senderAccount.accountType} account (${senderAccount.bankNumber}) to ${recipientAcc.bankNumberS}.`);
+  
+    updateBalances(
+      parseFloat(senderAccount.balanceSavings).toFixed(2),
+      parseFloat(senderAccount.balanceChecking).toFixed(2)
+    );
   };
+  
   
   
   const handleAccountValidation = () => {

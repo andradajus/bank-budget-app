@@ -9,7 +9,15 @@ import AlertComponent from './AlertBox.jsx'
 
     const Dashboard = ({user, accountInfo}) => {
         const navigate = useNavigate()
+        const [balances, setBalances] = useState({
+          savings: user.balanceSavings || 0,
+          checking: user.balanceChecking || 0,
+        })
       
+      const updateBalances = (savings, checking) => {
+          setBalances({ savings, checking });
+      }
+
         useEffect(() => {
           if (!user) {
             navigate('/login')
@@ -32,17 +40,17 @@ import AlertComponent from './AlertBox.jsx'
                           <div className="bg-emerald-600">{user?.firstName}!</div>
                       </div>
                      <div className="flex flex-col">
-                    <div className="flex self-center bg-emerald-500">Savings Account:&#x20B1;{user.balanceSavings}</div>
-                    <div className="flex self-center bg-amber-500">Checking Account:&#x20B1;{user.balanceChecking}</div>
+                    <div className="flex self-center bg-emerald-500">Savings Account:&#x20B1;{balances.savings}</div>
+                    <div className="flex self-center bg-amber-500">Checking Account:&#x20B1;{balances.checking}</div>
                     </div>
                   </div>
               </div>
             </div>
           <div className="bg-orange-500 col-span-3 row-span-3 col-start-2 row-start-2 h-auto">
               <Routes>
-                <Route path="/account-balance" element={<AccountBalance user={user} accountInfo={accountInfo} />} />
+                <Route path="/account-balance" element={<AccountBalance user={user} accountInfo={accountInfo} balances={balances}/>} />
                 <Route path="/enroll-account" element={<EnrollAccount user={user} />} />
-                <Route path="/fund-transfer" element={<FundTransfer user={user} accountInfo={accountInfo} />} />
+                <Route path="/fund-transfer" element={<FundTransfer user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances}/>} />
              </Routes>
           </div>
           <div className="bg-cyan-300 col-span-3 col-start-2 row-start-5 h-auto">

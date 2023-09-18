@@ -2,7 +2,7 @@ import React from 'react'
 import SideBar from '../SideBar'
 import { useNavigate } from 'react-router-dom'
 
-const AccountBalance = ({ user }) => {
+const AccountBalance = ({ user,balances }) => {
   const navigate = useNavigate()
 
   return (
@@ -15,7 +15,7 @@ const AccountBalance = ({ user }) => {
             </h2>
             {user.balanceSavings !== undefined && (
               <h2 className="block text-gray-700 text-sm font-bold mb-2">
-                Savings Account Balance: &#x20B1;{user.balanceSavings}
+                Savings Account Balance: &#x20B1;{balances.savings}
               </h2>
             )}
             <h2 className="block text-gray-700 text-sm font-bold mb-2">
@@ -23,7 +23,7 @@ const AccountBalance = ({ user }) => {
             </h2>
             {user.balanceChecking !== undefined && (
               <h2 className="block text-gray-700 text-sm font-bold mb-2">
-                Checking Account Balance: &#x20B1;{user.balanceChecking}
+                Checking Account Balance: &#x20B1;{balances.checking}
               </h2>
             )}
           </>
