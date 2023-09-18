@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-const FundTransfer = ({ user, accountInfo }) => {
+const FundTransfer = ({ user }) => {
   const [senderAccount, setSenderAccount] = useState({
     accountType: '',
     bankNumber: '',
     balance: 0,
-  });
+  })
 
   const [recipientAccount, setRecipientAccount] = useState('');
   const [amount, setAmount] = useState('');
@@ -20,10 +20,7 @@ const FundTransfer = ({ user, accountInfo }) => {
     }));
   }, [user]);
 
-  const handleTransfer = () => {
-    console.log('Transfer initiated:', amount, 'from', senderAccount.bankNumber, 'to', recipientAccount);
-    // Add your fund transfer logic here
-  };
+
 
   const handleAccountValidation = () => {
     // Placeholder logic for recipient validation
@@ -121,7 +118,7 @@ const FundTransfer = ({ user, accountInfo }) => {
 
       <div>Type of Account: {recipientInfo ? recipientInfo.accountType : ''}</div>
       <div>Recipient Name: {recipientInfo ? `${recipientInfo.lastName}, ${recipientInfo.firstName}` : ''}</div>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={handleTransfer}>
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Transfer Funds
       </button>
     </>

@@ -48,7 +48,16 @@ import AlertComponent from './AlertBox.jsx'
                 <Route path="/fund-transfer" element={<FundTransfer user={user} accountInfo={accountInfo} />} />
              </Routes>
           </div>
-          <div className="bg-cyan-300 col-span-3 col-start-2 row-start-5 h-auto">4</div>
+          <div className="bg-cyan-300 col-span-3 col-start-2 row-start-5 h-auto">
+            <div  className="flex justify-center">Transaction History</div>
+            <div  className="flex justify-around">
+              <div>Transaction History</div>
+              <div>Transaction Number</div>
+              <div>Date</div>
+              <div>Amount</div>
+              <div>Type of Transaction</div>
+            </div>
+          </div>
           <div className="bg-green-300 row-span-5 col-start-5 row-start-1 h-auto">5</div>
     </div>
   </div>
