@@ -52,28 +52,26 @@ const FundTransfer = ({ user, updateBalances, balances }) => {
 
     if (!recipientAcc) {
       console.log('Recipient account not found.')
-      return;
+      return
     }
 
-    recipientAcc.balanceSavings = (parseFloat(recipientAcc.balanceSavings) + parseFloat(amount)).toFixed(2);
+    recipientAcc.balanceSavings = (parseFloat(recipientAcc.balanceSavings) + parseFloat(amount)).toFixed(2)
 
-    localStorage.setItem('accounts', JSON.stringify(accounts));
-
-    console.log(`Transferred ${amount} from ${senderAccount.accountType} account (${senderAccount.bankNumber}) to ${recipientAcc.bankNumberS}.`);
+    localStorage.setItem('accounts', JSON.stringify(accounts))
 
     updateBalances(
-      parseFloat(senderAccount.balanceSavings).toFixed(2),
-      parseFloat(senderAccount.balanceChecking).toFixed(2)
-    );
+      parseFloat(senderAccount.balanceSavings.toLocaleString()).toFixed(2),
+      parseFloat(senderAccount.balanceChecking.toLocaleString()).toFixed(2)
+    )
 
     const transaction = {
       date: new Date().toLocaleString(),
       amount: parseFloat(amount).toFixed(2),
       type: `Transfer to ${recipientInfo.accountType} account (${recipientAcc.bankNumberS})`,
       transactionNumber: transactionNumber
-    };
+    }
     setTransactionHistory([...transactionHistory, transaction]);
-  };
+  }
     
   const handleAccountValidation = () => {
     const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
@@ -83,24 +81,24 @@ const FundTransfer = ({ user, updateBalances, balances }) => {
       const lastDigit = parseInt(recipientAccount.slice(-1), 10);
       const accountType = lastDigit === 1 ? 'Savings' : 'Checking';
   
-      setRecipientInfo({ ...recipient, accountType });
+      setRecipientInfo({ ...recipient, accountType })
     } else {
-      setRecipientInfo(null);
+      setRecipientInfo(null)
     }
   };
 
   const handleRecipientAccountBlur = () => {
-    handleAccountValidation();
+    handleAccountValidation()
   };
 
 
   const handleAccountNumberInput = (e) => {
-    setRecipientAccount(e.target.value);
-    handleAccountValidation();
+    setRecipientAccount(e.target.value)
+    handleAccountValidation()
   };
 
   const handleAccountSelect = (e) => {
-    const { value } = e.target;
+    const { value } = e.target
 
     if (user) {
       if (value === 'savings' && user.bankNumberS) {
@@ -122,25 +120,27 @@ const FundTransfer = ({ user, updateBalances, balances }) => {
           accountType: '',
           bankNumber: '',
           balance: 0,
-        });
+        })
       }
     }
 
     setSelectedAccount(value);
-  };
+  }
 
   return (
     <>
-      <div>
-        Transfer from:
-        <select value={selectedAccount} onChange={handleAccountSelect}>
+      <div className="bg-blue-100 shadow-md rounded p-4 mb-3 flex flex-col">
+        <div className="block mb-2 text-m font-medium text-gray-900 dark:text-white">Choose Account</div>
+        <select className=" flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                    focus:ring-blue-500 focus:border-blue-500 w-auto p-2.5 dark:bg-gray-700
+                     dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                      dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                      value={selectedAccount} onChange={handleAccountSelect}>
           <option value="">Select Account</option>
           {user && user.bankNumberS && <option value="savings">Savings Account</option>}
           {user && user.bankNumberC && <option value="checking">Checking Account</option>}
         </select>
-      </div>
-
-      {selectedAccount && (
+        {selectedAccount && (
         <div>
           {senderAccount.bankNumber && (
             <>
@@ -151,23 +151,61 @@ const FundTransfer = ({ user, updateBalances, balances }) => {
           )}
         </div>
       )}
-
-      <div>
-        <label htmlFor="recipientAccount">Recipient Account Number:</label>
-        <input
-          type="text"
-          id="recipientAccount"
-          value={recipientAccount} 
-          onBlur={handleRecipientAccountBlur}
-          onChange={handleAccountNumberInput}
-        />
       </div>
 
-      <label htmlFor="amount">Amount:</label>
-      <input type="number" id="amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
 
-      <div>Type of Account: {recipientInfo ? recipientInfo.accountType : ''}</div>
-      <div>Recipient Name: {recipientInfo ? `${recipientInfo.lastName}, ${recipientInfo.firstName}` : ''}</div>
+          <div className="bg-blue-100 shadow-md rounded p-4 mb-3 flex flex-row justify-around">
+        <div className="flex flex-col">
+          <div className="flex flex-row">
+            <div className="justify-center content-center">
+            <label className="text-m font-medium text-gray-900 dark:text-white text-sm mr-2" htmlFor="recipientAccount">Recipient Account Number:</label>
+            <input
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
+              focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 
+              dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              type="text"
+              id="recipientAccount"
+              placeholder="100-12345678-1"
+              value={recipientAccount} 
+              onBlur={handleRecipientAccountBlur}
+              onChange={handleAccountNumberInput}
+            />
+            </div>
+              <div className="justify-center content-center">
+                <label className="text-m font-medium text-gray-900 dark:text-white text-sm ml-2 mr-2" htmlFor="amount">Amount:</label>
+                <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
+                  focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 
+                  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="&#x20B1;1,000"
+                  type="number" 
+                  id="amount" 
+                  value={amount} 
+                  onChange={(e) => setAmount(e.target.value)} /> 
+              </div> 
+          </div>
+          <div className="flex flex-col">
+          <div className="self-center underline underline-offset-4 text-m">Recipient Details</div>
+            <div className="flex justify-between">
+                <div className="flex justify-center">
+                  <small className="pr-2">Type of Account:</small>
+                  <small className="block text-gray-700 text-sm font-bold mb-2">
+                    {recipientInfo ? recipientInfo.accountType : ''}
+                  </small>
+                </div>
+                <div className="flex justify-center">
+                  <small className="pr-2">Recipient Name</small>
+                  <small className="block text-gray-700 text-sm font-bold mb-2">
+                  {recipientInfo ? `${recipientInfo.lastName}, ${recipientInfo.firstName}` : ''}
+                  </small>
+             </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+      
+
+      
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={handleTransfer}>
         Transfer Funds
       </button>

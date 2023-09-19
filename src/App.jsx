@@ -22,17 +22,17 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
           bankNumberC: '101-12345678-2',
           balanceChecking: 99999999.99,
         },
-      ];
+      ]
   
-      localStorage.setItem('accounts', JSON.stringify(registeredAccounts))
-    };
+      localStorage.setItem('accounts', JSON.stringify(registeredAccounts));
+    }
   
     useEffect(() => {
-      setInitialData()
+      setInitialData();
     }, []);
   
     const handleNewUserRegistration = (formData) => {
-      const accountData = JSON.parse(localStorage.getItem('accounts')) || []
+      const accountData = JSON.parse(localStorage.getItem('accounts')) || [];
       const newData = [...accountData, formData];
       localStorage.setItem('accounts', JSON.stringify(newData))
     }
@@ -50,8 +50,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 
 
   return (
-    <>
-      <div className="flex flex-col border-solid border-2 w-screen h-screen bg-blue-100 justify-center items-center">
+      <div className="flex flex-col border-solid border-2 h-screen w-screen bg-slate-100 justify-center items-center">
         <main>
           {alert && <AlertComponent message={alert.message} type={alert.type} />}
           <Router>
@@ -71,15 +70,14 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
               />
 
               <Route
-                path="/login"
+                path="login"
                 element={<Login setCurrentPage={setCurrentPage} setLoggedInUser={setLoggedInUser} showAlert={showAlert} />}
               />
             </Routes>
           </Router>
         </main>
       </div>
-      <div className="bg-fuchsia-300">footer here</div>
-    </>
+
   )
 }
 

@@ -25,13 +25,13 @@ const AccountBalance = ({ user,balances }) => {
 
             <div className="flex flex-col justify-center">
               <div className="flex justify-center text-gray-700 font-bold text-3xl">Checking Account Number</div> 
-              <div className="flex justify-center text-3xl text ">{user.bankNumberC}</div>
+              <div className="flex justify-center text-3xl text ">{user.bankNumberC || "N/A"}</div>
             </div>
               
             {user.balanceChecking !== undefined && (
               <div className="flex flex-col justify-center">
               <h2 className="flex justify-center text-gray-700 font-bold text-3xl">Checking Account Balance</h2>
-              <div className="flex justify-center font-semibold text-slate-800 text-xl lining-nums">&#x20B1;{balances.checking.toLocaleString()}</div>
+              <div className="flex justify-center font-semibold text-slate-800 text-xl lining-nums">&#x20B1;{balances.checking.toLocaleString() || "N/A" }</div>
               </div>
             )}
            

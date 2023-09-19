@@ -12,7 +12,7 @@ const AlertComponent = ({ message, type }) => {
   }
 
   return (
-    <div className={`fixed top-0 left-0 p-4 gap-2 w-80 flex justify-center opacity-75 m-3 font-semibold rounded-md ${alertClass} text-black `}>
+    <div className={`fixed top-0 left-1 ms-20 p-3 gap-2 w-80 flex justify-center opacity-60 m-3 font-semibold rounded-md ${alertClass} text-black `}>
       {message}
     </div>
   )

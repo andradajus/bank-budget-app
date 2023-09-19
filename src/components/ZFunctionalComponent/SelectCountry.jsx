@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 
-function SelectCountry({ value, onChange, showAlert }) {
+function SelectCountry({ country, onChange, showAlert }) {
     const [countryWarning, setCountryWarning] = useState('')
 
     const handleCountryChange = (e) => {
@@ -9,23 +9,23 @@ function SelectCountry({ value, onChange, showAlert }) {
     onChange(e)
       
           if (selectedCountry !== 'PH') {
-            showAlert('Your country is not support yet', 'error')
+            showAlert('Your country is not supported yet', 'error')
           } else {
             setCountryWarning('')
           }
-        };
+        }
         return (
 <div>
-<label>Country<span className="text-red-600 ">*</span></label>
-<select className="flex justify-self-center"
+<label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option<span className="text-red-600 ">*</span></label>
+<select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
     type="text"
     label="Country"
     id="selectcountry"
     required
-    value={value}
+    value={country}
     onChange={handleCountryChange}
 >
-    <option id="selectcountry" className="italic">Select Country</option>
+    <option selected id="selectcountry" className="italic">Choose a country</option>
     <option value="AF">Afghanistan</option>
     <option value="AX">Aland Islands</option>
     <option value="AL">Albania</option>
@@ -280,7 +280,7 @@ function SelectCountry({ value, onChange, showAlert }) {
     <option value="ZW">Zimbabwe</option>
 </select>
 </div>
-);
+)
 }
 
 export default SelectCountry
