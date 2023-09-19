@@ -3,39 +3,42 @@ import SideBar from '../SideBar'
 import { useNavigate } from 'react-router-dom'
 
 const AccountBalance = ({ user,balances }) => {
-  const navigate = useNavigate()
 
   return (
     <>
       <div>
         {user && (
           <>
-            <h2 className="block text-gray-700 text-sm font-bold mb-2">
-              Savings Account Number: {user.bankNumberS}
-            </h2>
+          <div className="flex flex-col bg-blue-100 rounded-md p-6 mt-10 max-w-xl mx-auto w-auto h-auto">
+            <div className="flex flex-col justify-center">
+              <div className="flex justify-center text-gray-700 font-bold text-3xl">Savings Account Number</div>
+              <div className="flex justify-center text-3xl text">{user.bankNumberS}</div>
+            </div>
+              
+            
             {user.balanceSavings !== undefined && (
-              <h2 className="block text-gray-700 text-sm font-bold mb-2">
-                Savings Account Balance: &#x20B1;{balances.savings}
-              </h2>
+              <div className="flex flex-col justify-center">
+              <div className="flex justify-center text-gray-700 font-bold text-3xl">Savings Account Balance</div>
+              <div className="flex justify-center font-semibold text-slate-800 text-xl lining-nums">&#x20B1;{balances.savings.toLocaleString()}</div>
+              </div>
             )}
-            <h2 className="block text-gray-700 text-sm font-bold mb-2">
-              Checking Account Number: {user.bankNumberC}
-            </h2>
+
+            <div className="flex flex-col justify-center">
+              <div className="flex justify-center text-gray-700 font-bold text-3xl">Checking Account Number</div> 
+              <div className="flex justify-center text-3xl text ">{user.bankNumberC}</div>
+            </div>
+              
             {user.balanceChecking !== undefined && (
-              <h2 className="block text-gray-700 text-sm font-bold mb-2">
-                Checking Account Balance: &#x20B1;{balances.checking}
-              </h2>
+              <div className="flex flex-col justify-center">
+              <h2 className="flex justify-center text-gray-700 font-bold text-3xl">Checking Account Balance</h2>
+              <div className="flex justify-center font-semibold text-slate-800 text-xl lining-nums">&#x20B1;{balances.checking.toLocaleString()}</div>
+              </div>
             )}
+           
+            </div>
           </>
         )}
       </div>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        type="button"
-        onClick={() => navigate('/home')}
-      >
-        Back
-      </button>
     </>
   );
 };

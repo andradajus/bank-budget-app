@@ -50,13 +50,19 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
         setEmail(e.target.value)
       }
 
-    const handleSubmit = (e) => {
+      const handleBirthDateChange = (e) => {
+        setBirthDate(e.target.value);
+      }
+
+      const handleSubmit = (e) => {
         e.preventDefault()
+
+      
     
-         if(password !== confirmPassword) {
-          showAlert('Password does not match', 'error')
-            return
-         }
+        if (password !== confirmPassword) {
+          showAlert('Password does not match', 'error');
+          return;
+        }
          
          console.log('success')
          
@@ -86,8 +92,8 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
 
     return (
       <>
-        <form className="flex flex-col bg-slate-200 p-7 rounded" onSubmit={handleSubmit}>
-        <div className="flex text-2xl align-center justify-center">Register an Account</div>
+        <form className="flex flex-col bg-gradient-to-l from-blue-200 via-blue-100 to-blue-300 p-7 rounded" onSubmit={handleSubmit}>
+        <div className="flex align-center justify-center rounded leading-normal text-3xl md:text font-bold pb-4">Register an Account</div>
 
         <div className="bg-white shadow-md rounded p-5 mb-4 flex w-full justify-between">
           <div>
