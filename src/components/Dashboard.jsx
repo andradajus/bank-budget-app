@@ -6,6 +6,8 @@ import AccountBalance from './Dashboard/AccountBalance'
 import EnrollAccount from './Dashboard/EnrollAccount'
 import FundTransfer from './Dashboard/FundTransfer'
 import AlertComponent from './AlertBox.jsx'
+import DashboardHome from './Dashboard/Home'
+import AddFunds from './Dashboard/AddFunds'
 
     const Dashboard = ({user, accountInfo}) => {
         const navigate = useNavigate()
@@ -26,7 +28,7 @@ import AlertComponent from './AlertBox.jsx'
         useEffect(() => {
           if (!user) {
             navigate('/login')
-          }
+          } 
         }, [navigate, user])
 
 
@@ -47,12 +49,12 @@ import AlertComponent from './AlertBox.jsx'
                      <div className="flex flex-col bg-blue-100 shadow-md rounded gap-1 p-2">
                       <div className="flex flex-col">
                         <div className="flex">Savings Account</div>
-                        <div className="font-semibold text-slate-800 text-xl lining-nums">&#x20B1;{balances.savings.toLocaleString()}</div>
+                        <div className="font-semibold text-slate-800 text-xl lining-nums">&#x20B1;{balances.savings}</div>
                       </div>
 
                       <div className="flex flex-col">
                         <div className="flex">Checking Account</div>
-                        <div className="font-semibold text-slate-800 text-xl lining-nums">&#x20B1;{balances.checking.toLocaleString()}</div>
+                        <div className="font-semibold text-slate-800 text-xl lining-nums">&#x20B1;{balances.checking}</div>
                       </div>
 
                     </div>
@@ -63,7 +65,9 @@ import AlertComponent from './AlertBox.jsx'
               <Routes>
                 <Route path="/account-balance" element={<AccountBalance user={user} accountInfo={accountInfo} balances={balances}/>} />
                 <Route path="/enroll-account" element={<EnrollAccount user={user} />} />
+                <Route path="/add-funds" element={<AddFunds user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} />} />
                 <Route path="/fund-transfer" element={<FundTransfer user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} />} />
+                <Route index element={<DashboardHome user={user} accountInfo={accountInfo} balances={balances} />} />
              </Routes>
           </div>
           <div className="bg-blue-200 shadow-md rounded col-span-3 col-start-1 row-start-5 h-auto ms-24 overflow-auto">

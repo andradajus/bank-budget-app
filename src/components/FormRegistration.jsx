@@ -82,6 +82,7 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
             balanceSavings: 0, 
             bankNumberC: '', 
             balanceChecking: 0, 
+            transactionHistory: []
           } 
 
         handleNewUserRegistration(formData)

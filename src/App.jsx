@@ -21,6 +21,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
           balanceSavings: 99999999.99,
           bankNumberC: '101-12345678-2',
           balanceChecking: 99999999.99,
+          transactionHistory: []
         },
       ]
   

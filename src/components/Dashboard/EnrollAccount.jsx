@@ -5,7 +5,6 @@ const EnrollAccount = ({ user }) => {
     const navigate= useNavigate()
   return (
   <>
-    <SideBar />
     <div>
       <h2>Enroll Account</h2>
       <div>
