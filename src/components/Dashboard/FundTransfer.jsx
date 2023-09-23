@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const FundTransfer = ({ user, updateBalances, balances }) => {
+const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory }) => {
   const [senderAccount, setSenderAccount] = useState({
     accountType: '',
     bankNumber: '',
@@ -11,7 +11,6 @@ const FundTransfer = ({ user, updateBalances, balances }) => {
   const [amount, setAmount] = useState('');
   const [recipientInfo, setRecipientInfo] = useState(null);
   const [selectedAccount, setSelectedAccount] = useState('');
-  const [transactionHistory, setTransactionHistory] = useState([]);
 
   useEffect(() => {
     setSenderAccount((prevSenderAccount) => ({
@@ -24,7 +23,6 @@ const FundTransfer = ({ user, updateBalances, balances }) => {
   const handleTransfer = () => {
     const accounts = JSON.parse(localStorage.getItem('accounts')) || []
     const senderAccount = accounts.find((account) => account.username === user.username)
-    const transactionNumber = Math.floor(1000 + Math.random() * 9000)
 
     if (!senderAccount) {
       console.log('Sender account not found.');
@@ -55,6 +53,14 @@ const FundTransfer = ({ user, updateBalances, balances }) => {
       return
     }
 
+    const transaction = {
+      transactionNumber: Math.floor(1000 + Math.random() * 9000),
+      date: new Date().toLocaleString(),
+      amount: parseFloat(amount).toFixed(2),
+      type: `Transfer`
+    };
+    addTransactionToHistory(transaction);
+
     recipientAcc.balanceSavings = (parseFloat(recipientAcc.balanceSavings) + parseFloat(amount)).toFixed(2)
 
     localStorage.setItem('accounts', JSON.stringify(accounts))
@@ -63,14 +69,6 @@ const FundTransfer = ({ user, updateBalances, balances }) => {
       parseFloat(senderAccount.balanceSavings.toLocaleString()).toFixed(2),
       parseFloat(senderAccount.balanceChecking.toLocaleString()).toFixed(2)
     )
-
-    const transaction = {
-      date: new Date().toLocaleString(),
-      amount: parseFloat(amount).toFixed(2),
-      type: `Transfer to ${recipientInfo.accountType} account (${recipientAcc.bankNumberS})`,
-      transactionNumber: transactionNumber
-    }
-    setTransactionHistory([...transactionHistory, transaction]);
   }
     
   const handleAccountValidation = () => {
@@ -209,16 +207,6 @@ const FundTransfer = ({ user, updateBalances, balances }) => {
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={handleTransfer}>
         Transfer Funds
       </button>
-      <div>
-        <h2>Transaction History</h2>
-        <ul>
-          {transactionHistory.map((transaction, index) => (
-            <li key={index}>
-              Number: {transaction.transactionNumber} Date: {transaction.date}, Amount: {transaction.amount}, Type: {transaction.type} 
-            </li>
-          ))}
-        </ul>
-      </div>
     </>
   );
 };
