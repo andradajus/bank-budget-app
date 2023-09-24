@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory }) => {
+  const [transactionHistory, setTransactionHistory] = useState(
+    JSON.parse(localStorage.getItem('transactionHistory')) || []
+  );
   const [senderAccount, setSenderAccount] = useState({
     accountType: '',
     bankNumber: '',
@@ -57,8 +60,11 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory 
       transactionNumber: Math.floor(1000 + Math.random() * 9000),
       date: new Date().toLocaleString(),
       amount: parseFloat(amount).toFixed(2),
-      type: `Transfer`
+      type: `Fund Transfer`
     };
+    const updatedTransactionHistory = [...transactionHistory, transaction];
+    setTransactionHistory(updatedTransactionHistory);
+    localStorage.setItem('transactionHistory', JSON.stringify(updatedTransactionHistory));
     addTransactionToHistory(transaction);
 
     recipientAcc.balanceSavings = (parseFloat(recipientAcc.balanceSavings) + parseFloat(amount)).toFixed(2)

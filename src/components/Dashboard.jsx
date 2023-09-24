@@ -23,13 +23,24 @@ import AddFunds from './Dashboard/AddFunds'
 
       const addTransactionToHistory = (transaction) => {
         setTransactionHistory([...transactionHistory, transaction]);
+        localStorage.setItem('transactionHistory', JSON.stringify([...transactionHistory, transaction]));
+        const recipientTransactionHistory = JSON.parse(localStorage.getItem(`transactionHistory_${recipientInfo.username}`)) || [];
+        const updatedRecipientTransactionHistory = [...recipientTransactionHistory, transaction];
+        localStorage.setItem(`transactionHistory_${recipientInfo.username}`, JSON.stringify(updatedRecipientTransactionHistory));
       };
+
+      
 
         useEffect(() => {
           if (!user) {
             navigate('/login')
-          } 
-        }, [navigate, user])
+          } else {
+            const storedTransactionHistory = JSON.parse(localStorage.getItem('transactionHistory'));
+            if (storedTransactionHistory) {
+              setTransactionHistory(storedTransactionHistory);
+          }
+        }
+      }, [navigate, user])
 
 
   return (
