@@ -9,7 +9,7 @@ import AlertComponent from './AlertBox.jsx'
 import DashboardHome from './Dashboard/Home'
 import AddFunds from './Dashboard/AddFunds'
 
-    const Dashboard = ({user, accountInfo}) => {
+    const Dashboard = ({user, accountInfo, alert}) => {
         const navigate = useNavigate()
         const [transactionHistory, setTransactionHistory] = useState([]);
         const [balances, setBalances] = useState({
@@ -22,11 +22,9 @@ import AddFunds from './Dashboard/AddFunds'
       }
 
       const addTransactionToHistory = (transaction) => {
-        setTransactionHistory([...transactionHistory, transaction]);
-        localStorage.setItem('transactionHistory', JSON.stringify([...transactionHistory, transaction]));
-        const recipientTransactionHistory = JSON.parse(localStorage.getItem(`transactionHistory_${recipientInfo.username}`)) || [];
-        const updatedRecipientTransactionHistory = [...recipientTransactionHistory, transaction];
-        localStorage.setItem(`transactionHistory_${recipientInfo.username}`, JSON.stringify(updatedRecipientTransactionHistory));
+        const updatedTransactionHistory = [...transactionHistory, transaction];
+        setTransactionHistory(updatedTransactionHistory);
+        localStorage.setItem('transactionHistory', JSON.stringify(updatedTransactionHistory));
       };
 
       
