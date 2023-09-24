@@ -8,6 +8,7 @@ import FundTransfer from './Dashboard/FundTransfer'
 import AlertComponent from './AlertBox.jsx'
 import DashboardHome from './Dashboard/Home'
 import AddFunds from './Dashboard/AddFunds'
+import BudgetTracker from './Dashboard/BudgetTracker'
 
     const Dashboard = ({user, accountInfo, alert}) => {
         const navigate = useNavigate()
@@ -112,7 +113,7 @@ import AddFunds from './Dashboard/AddFunds'
       </div>
         </div>
       </div>
-          <div className="bg-blue-200 shadow-md rounded col-span-2 row-span-4 col-start-4 row-start-1 mt-2 w-auto">Credit Expenses Here</div>
+          <div className="bg-blue-200 shadow-md rounded col-span-2 row-span-4 col-start-4 row-start-1 mt-2 w-auto"><BudgetTracker /></div>
           <div className="flex bg-blue-200 shadow-md rounded w-auto">Currency Exchange Rate here</div>
     </div>
   </div>
