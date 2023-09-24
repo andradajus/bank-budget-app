@@ -21,8 +21,17 @@ import AddFunds from './Dashboard/AddFunds'
           setBalances({ savings, checking });
       }
 
-      const addTransactionToHistory = (transaction) => {
-        const updatedTransactionHistory = [...transactionHistory, transaction];
+      const getFilteredTransactionHistory = (userBankNumber) => {
+        return transactionHistory.filter(
+          (transaction) => transaction.senderAccountNumber === userBankNumber || transaction.recipientAccountNumber === userBankNumber
+        );
+      };
+
+      const addTransactionToHistory = (transaction, senderAccountNumber, recipientAccountNumber) => {
+        const updatedTransactionHistory = [
+          ...transactionHistory,
+          { ...transaction, senderAccountNumber, recipientAccountNumber }
+        ];
         setTransactionHistory(updatedTransactionHistory);
         localStorage.setItem('transactionHistory', JSON.stringify(updatedTransactionHistory));
       };
@@ -90,18 +99,16 @@ import AddFunds from './Dashboard/AddFunds'
             <div>Type</div>
           </div>
 
-        {transactionHistory.map((transaction, index) => (
-          <div key={index} className="flex rounded-md m-1 justify-evenly">
-
-            <div className="bg-green-200 flex justify-between rounded-md w-full">            
-                <div>{transaction.transactionNumber}</div>
-                <div className="pl-1ik0">{transaction.date}</div>
-                <div className="pr-8">&#x20B1;{transaction.amount}</div>
-                <div>{transaction.type}</div>
-            </div>
-
-          </div>
-        ))}
+          {getFilteredTransactionHistory(user.bankNumberS).map((transaction, index) => (
+    <div key={index} className="flex rounded-md m-1 justify-evenly">
+      <div className="bg-green-200 flex justify-between rounded-md w-full">
+        <div>{transaction.transactionNumber}</div>
+        <div className="pl-1ik0">{transaction.date}</div>
+        <div className="pr-8">&#x20B1;{transaction.amount}</div>
+        <div>{transaction.type}</div>
+      </div>
+    </div>
+  ))}
       </div>
         </div>
       </div>

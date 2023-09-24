@@ -65,7 +65,7 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory 
     const updatedTransactionHistory = [...transactionHistory, transaction];
     setTransactionHistory(updatedTransactionHistory);
     localStorage.setItem('transactionHistory', JSON.stringify(updatedTransactionHistory));
-    addTransactionToHistory(transaction);
+    addTransactionToHistory(transaction, senderAccount.bankNumber, recipientAccount);
 
     recipientAcc.balanceSavings = (parseFloat(recipientAcc.balanceSavings) + parseFloat(amount)).toFixed(2)
 
