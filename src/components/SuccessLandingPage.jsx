@@ -20,7 +20,7 @@ const SuccessLandingPage = () => {
   }, []);
 
   return (
-  <div className="bg-blue-100 pb-20">
+  <div className="bg-blue-100 pb-20 cursor-wait">
     <div className="text-center mt-20">
       <div className="mb-8 text-2xl font-bold">Transaction Successful</div>
       <div className="inline-block">

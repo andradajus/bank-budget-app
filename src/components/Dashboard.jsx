@@ -77,12 +77,12 @@ import TransactionHistoryComponent from './Dashboard/TransactionHistory'
               <div className="bg-blue-200 shadow-md rounded col-span-3 h-auto ms-24 mt-2 max-h-full">
                 <div className="flex p-1  flex-col">
                   <div className="flex flex-row place-content-around">
-                      <div className="bg-blue-100 shadow-md rounded p-2 pl-16 pr-16">
+                      <div className="bg-blue-100 shadow-md rounded p-2 pl-16 pr-16 hover:scale-105 transition duration-300 ease-in-out ">
                           <div className=" rounded leading-normal text-3xl md:text font-bold">Welcome,</div> 
                           <div className="flex uppercase rounded leading-normal text-2xl md:text ">{user?.firstName}</div>
                       </div>
 
-                     <div className="flex flex-col bg-blue-100 shadow-md rounded gap-1 p-2">
+                     <div className="flex flex-col bg-blue-100 shadow-md rounded gap-1 p-2 hover:scale-105 transition duration-300 ease-in-out ">
                       <div className="flex flex-col">
                         <div className="flex">Savings Account</div>
                         <div className="font-semibold text-slate-800 text-xl lining-nums">&#x20B1;{balances.savings}</div>
@@ -120,7 +120,7 @@ import TransactionHistoryComponent from './Dashboard/TransactionHistory'
 
           {getFilteredTransactionHistory(user.bankNumberS).map((transaction, index) => (
     <div key={index} className="flex rounded-md m-1 justify-evenly">
-      <div className="bg-green-200 flex justify-between rounded-md w-full">
+      <div className=" hover:scale-105 transition duration-300 ease-in-out flex cursor-default justify-between rounded-md w-full   hover:opacity-40">
         <div>{transaction.transactionNumber}</div>
         <div className="pl-1">{transaction.date}</div>
         <div className="pr-8">&#x20B1;{transaction.amount}</div>
