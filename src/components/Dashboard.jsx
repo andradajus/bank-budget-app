@@ -9,6 +9,7 @@ import AlertComponent from './AlertBox.jsx'
 import DashboardHome from './Dashboard/Home'
 import AddFunds from './Dashboard/AddFunds'
 import BudgetTracker from './Dashboard/BudgetTracker'
+import TransactionHistoryComponent from './Dashboard/TransactionHistory'
 
     const Dashboard = ({user, accountInfo, alert}) => {
         const navigate = useNavigate()
@@ -23,13 +24,13 @@ import BudgetTracker from './Dashboard/BudgetTracker'
       }
 
       const getFilteredTransactionHistory = (userBankNumber) => {
-        console.log('User Bank Number:', userBankNumber); // Log the user's bank number
+        console.log('User Bank Number:', userBankNumber);
       
         const filteredTransactions = transactionHistory.filter(
           (transaction) => transaction.senderAccountNumber === userBankNumber || transaction.recipientAccountNumber === userBankNumber
         );
       
-        console.log('Filtered Transactions:', filteredTransactions); // Log the filtered transactions
+        console.log('Filtered Transactions:', filteredTransactions); 
       
         return filteredTransactions;
       };
@@ -92,6 +93,7 @@ import BudgetTracker from './Dashboard/BudgetTracker'
               <Routes>
                 <Route path="/account-balance" element={<AccountBalance user={user} accountInfo={accountInfo} balances={balances}/>} />
                 <Route path="/enroll-account" element={<EnrollAccount user={user} />} />
+                <Route path="/transaction-history" element={<TransactionHistoryComponent user={user} />} />
                 <Route path="/add-funds" element={<AddFunds user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} />} />
                 <Route path="/fund-transfer" element={<FundTransfer user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} />} />
                 <Route index element={<DashboardHome user={user} accountInfo={accountInfo} balances={balances} />} />

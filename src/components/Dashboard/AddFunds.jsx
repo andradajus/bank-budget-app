@@ -1,10 +1,24 @@
 import React, { useState } from "react";
 
-const AddFunds = ({ addTransactionToHistory }) => {
+const AddFunds = ({ user, updateBalances, addTransactionToHistory }) => {
   const [amount, setAmount] = useState(0);
 
   const handleAddFunds = (increment) => {
-    setAmount(amount + increment);
+    const newAmount = amount + increment;
+    setAmount(newAmount);
+  };
+
+  const handleAddFundsClick = () => {
+    const transaction = {
+      transactionNumber: Math.floor(1000 + Math.random() * 9000),
+      date: new Date().toLocaleString(),
+      amount: amount,
+      type: "Add Funds"
+    };
+
+    // Pass the updated amount to update the balance in the parent component
+    updateBalances(user.balanceSavings + amount);
+    addTransactionToHistory(transaction, user.bankNumberS);
   };
 
   const handleClear = () => {
@@ -57,7 +71,9 @@ const AddFunds = ({ addTransactionToHistory }) => {
             </div>
 
             <div className="flex justify-center">
-              <button className="flex justify-center bg-blue-500 hover:bg-blue-700 rounded-md text-white font-bold py-2 px-4 mt-2 " type="button" onClick={() => addTransactionToHistory(amount)}>
+              <button className="flex justify-center bg-blue-500
+               hover:bg-blue-700 rounded-md text-white font-bold py-2 px-4 mt-2 " 
+               type="button" onClick={handleAddFundsClick}>
               Add Funds
               </button>
             </div>

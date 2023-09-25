@@ -1,4 +1,4 @@
-const TransactionHistory = ({ transactions }) => {
+const TransactionHistoryComponent = () => {
   return (
     <>
       <div className="flex justify-center">Transaction History</div>
@@ -7,16 +7,11 @@ const TransactionHistory = ({ transactions }) => {
         <div>Date</div>
         <div>Amount</div>
         <div>Type of Transaction</div>
+        <div>Sender Account Number if add funds then just type Add Funds</div>
+        <div>Receiver Account Number</div>
       </div>
-      <ul>
-        {transactions.map((transaction, index) => (
-          <li key={index}>
-            {transaction.transactionNumber} {transaction.date}, {transaction.amount}, {transaction.type}
-          </li>
-        ))}
-      </ul>
     </>
   )
 }
 
-export default TransactionHistory
+export default TransactionHistoryComponent

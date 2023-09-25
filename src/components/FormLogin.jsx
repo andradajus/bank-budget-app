@@ -42,8 +42,15 @@ const Login = (props) => {
   }
 
   return (
+    <>
+ 
   <div className="flex flex-col h-screen justify-center items-center">
+  
   <form onSubmit={onSubmitLogin} className="bg-gradient-to-l from-blue-200 via-blue-100 to-blue-300 rounded p-6 mt-10 w-96 max-w-xl mx-auto">
+          <div className="flex flex-col">
+          <div className="flex justify-center text-2xl font-extrabold">CodeBank</div>
+          <small className="flex justify-center italic">"Where Every Transaction is a Function Call"</small>
+          </div>
       <div className="bg-gradient-to-l from-blue-300 via-blue-200 to-blue-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <label className="flex text-gray-700 text-sm font-bold mb-2">Username</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value={username} onChange={onChangeUsername} />
@@ -61,6 +68,7 @@ const Login = (props) => {
       </div>
     </form>
     </div>
+    </>
 
   )
 }
