@@ -24,21 +24,21 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory 
   }, [user]);
 
   const handleTransfer = () => {
-    const accounts = JSON.parse(localStorage.getItem('accounts')) || []
-    const senderAccount = accounts.find((account) => account.username === user.username)
-
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    const senderAccount = accounts.find((account) => account.bankNumberS === user.bankNumberS);
+  
     if (!senderAccount) {
       console.log('Sender account not found.');
       return;
     }
-
-    let senderBalance = parseFloat(senderAccount.balanceSavings)
-
+  
+    let senderBalance = parseFloat(senderAccount.balanceSavings);
+  
     if (isNaN(senderBalance) || senderBalance < parseFloat(amount)) {
-      senderBalance = parseFloat(senderAccount.balanceChecking)
-
+      senderBalance = parseFloat(senderAccount.balanceChecking);
+  
       if (isNaN(senderBalance) || senderBalance < parseFloat(amount)) {
-        console.log('Insufficient balance in both savings and checking accounts.')
+        console.log('Insufficient balance in both savings and checking accounts.');
         return;
       } else {
         senderAccount.accountType = 'Checking';
@@ -46,36 +46,36 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory 
       }
     } else {
       senderAccount.accountType = 'Savings';
-      senderAccount.balanceSavings = (senderBalance - parseFloat(amount)).toFixed(2)
+      senderAccount.balanceSavings = (senderBalance - parseFloat(amount)).toFixed(2);
     }
-
-    const recipientAcc = accounts.find((account) => account.bankNumberS === recipientAccount)
-
+  
+    const recipientAcc = accounts.find((account) => account.bankNumberS === recipientAccount);
+  
     if (!recipientAcc) {
-      console.log('Recipient account not found.')
-      return
+      console.log('Recipient account not found.');
+      return;
     }
-
+  
     const transaction = {
       transactionNumber: Math.floor(1000 + Math.random() * 9000),
       date: new Date().toLocaleString(),
       amount: parseFloat(amount).toFixed(2),
-      type: `Fund Transfer`
+      type: 'Fund Transfer'
     };
     const updatedTransactionHistory = [...transactionHistory, transaction];
     setTransactionHistory(updatedTransactionHistory);
     localStorage.setItem('transactionHistory', JSON.stringify(updatedTransactionHistory));
-    addTransactionToHistory(transaction, senderAccount.bankNumber, recipientAccount);
-
-    recipientAcc.balanceSavings = (parseFloat(recipientAcc.balanceSavings) + parseFloat(amount)).toFixed(2)
-
-    localStorage.setItem('accounts', JSON.stringify(accounts))
-
+    addTransactionToHistory(transaction, user.bankNumberS, recipientAccount);
+  
+    recipientAcc.balanceSavings = (parseFloat(recipientAcc.balanceSavings) + parseFloat(amount)).toFixed(2);
+  
+    localStorage.setItem('accounts', JSON.stringify(accounts));
+  
     updateBalances(
       parseFloat(senderAccount.balanceSavings.toLocaleString()).toFixed(2),
       parseFloat(senderAccount.balanceChecking.toLocaleString()).toFixed(2)
-    )
-  }
+    );
+  };
     
   const handleAccountValidation = () => {
     const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
@@ -102,34 +102,38 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory 
   };
 
   const handleAccountSelect = (e) => {
-    const { value } = e.target
-
+    const { value } = e.target;
+  
     if (user) {
-      if (value === 'savings' && user.bankNumberS) {
-        setSenderAccount((prevSenderAccount) => ({
-          ...prevSenderAccount,
+      let updatedAccount = {};
+  
+      if (value.toLowerCase() === 'savings' && user.bankNumberS) {
+        updatedAccount = {
           accountType: 'Savings',
           bankNumber: user.bankNumberS || 'N/A',
           balance: user.balanceSavings || 0,
-        }));
-      } else if (value === 'checking' && user.bankNumberC) {
-        setSenderAccount((prevSenderAccount) => ({
-          ...prevSenderAccount,
+        };
+      } else if (value.toLowerCase() === 'checking' && user.bankNumberC) {
+        updatedAccount = {
           accountType: 'Checking',
           bankNumber: user.bankNumberC || 'N/A',
           balance: user.balanceChecking || 0,
-        }));
+        };
       } else {
-        setSenderAccount({
+        updatedAccount = {
           accountType: '',
           bankNumber: '',
           balance: 0,
-        })
+        };
       }
-    }
+  
+      console.log('Updated Account:', updatedAccount);
 
+      setSenderAccount(updatedAccount);
+    }
+  
     setSelectedAccount(value);
-  }
+  };
 
   return (
     <>

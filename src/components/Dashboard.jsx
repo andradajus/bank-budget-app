@@ -23,12 +23,21 @@ import BudgetTracker from './Dashboard/BudgetTracker'
       }
 
       const getFilteredTransactionHistory = (userBankNumber) => {
-        return transactionHistory.filter(
+        console.log('User Bank Number:', userBankNumber); // Log the user's bank number
+      
+        const filteredTransactions = transactionHistory.filter(
           (transaction) => transaction.senderAccountNumber === userBankNumber || transaction.recipientAccountNumber === userBankNumber
         );
+      
+        console.log('Filtered Transactions:', filteredTransactions); // Log the filtered transactions
+      
+        return filteredTransactions;
       };
-
+      
       const addTransactionToHistory = (transaction, senderAccountNumber, recipientAccountNumber) => {
+        console.log('Sender Account Number:', senderAccountNumber);
+        console.log('Recipient Account Number:', recipientAccountNumber);
+      
         const updatedTransactionHistory = [
           ...transactionHistory,
           { ...transaction, senderAccountNumber, recipientAccountNumber }
@@ -36,7 +45,6 @@ import BudgetTracker from './Dashboard/BudgetTracker'
         setTransactionHistory(updatedTransactionHistory);
         localStorage.setItem('transactionHistory', JSON.stringify(updatedTransactionHistory));
       };
-
       
 
         useEffect(() => {
