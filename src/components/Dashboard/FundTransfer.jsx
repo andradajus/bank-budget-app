@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import SuccessLandingPage from "../SuccessLandingPage";
 
-const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory }) => {
+
+const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory, showAlert }) => {
+  const [showSuccessPage, setShowSuccessPage] = useState(false);
   const [transactionHistory, setTransactionHistory] = useState(
     JSON.parse(localStorage.getItem('transactionHistory')) || []
   );
@@ -62,19 +65,19 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory 
       amount: parseFloat(amount).toFixed(2),
       type: 'Fund Transfer'
     };
+    
     const updatedTransactionHistory = [...transactionHistory, transaction];
     setTransactionHistory(updatedTransactionHistory);
     localStorage.setItem('transactionHistory', JSON.stringify(updatedTransactionHistory));
     addTransactionToHistory(transaction, user.bankNumberS, recipientAccount);
-  
     recipientAcc.balanceSavings = (parseFloat(recipientAcc.balanceSavings) + parseFloat(amount)).toFixed(2);
-  
     localStorage.setItem('accounts', JSON.stringify(accounts));
-  
     updateBalances(
-      parseFloat(senderAccount.balanceSavings.toLocaleString()).toFixed(2),
-      parseFloat(senderAccount.balanceChecking.toLocaleString()).toFixed(2)
+    parseFloat(senderAccount.balanceSavings.toLocaleString()).toFixed(2),
+    parseFloat(senderAccount.balanceChecking.toLocaleString()).toFixed(2)
     );
+    showAlert('Transfer Successful', 'success')
+    setShowSuccessPage(true)
   };
     
   const handleAccountValidation = () => {
@@ -137,6 +140,10 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory 
 
   return (
     <>
+    {showSuccessPage ? (
+        <SuccessLandingPage user={user}/>
+      ) : (
+    <div>
       <div className="bg-blue-100 shadow-md rounded p-4 mb-3 flex flex-col">
         <div className="block mb-2 text-m font-medium text-gray-900 dark:text-white">Choose Account</div>
         <select className=" flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
@@ -210,13 +217,17 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory 
           </div>
         </div>
     </div>
+  
 
       
 
-      
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={handleTransfer}>
-        Transfer Funds
-      </button>
+      <div className="flex justify-center">
+        <button className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={handleTransfer}>
+          Transfer Funds
+        </button>
+      </div>
+    </div>
+      )}
     </>
   );
 };

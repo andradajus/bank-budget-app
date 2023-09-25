@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import SuccessLandingPage from "../SuccessLandingPage";
 
-const AddFunds = ({ user, updateBalances, addTransactionToHistory }) => {
+const AddFunds = ({ user, updateBalances, addTransactionToHistory, showAlert }) => {
   const [amount, setAmount] = useState(0);
+  const [showSuccessPage, setShowSuccessPage] = useState(false);
 
   const handleAddFunds = (increment) => {
     const newAmount = amount + increment;
@@ -9,16 +11,28 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory }) => {
   };
 
   const handleAddFundsClick = () => {
+    const updatedAccounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    const userAccount = updatedAccounts.find(account => account.bankNumberS === user.bankNumberS);
+  
+    if (userAccount) {
+      userAccount.balanceSavings += amount;
+      localStorage.setItem('accounts', JSON.stringify(updatedAccounts));
+      updateBalances(userAccount.balanceSavings);
+    }
+  
     const transaction = {
       transactionNumber: Math.floor(1000 + Math.random() * 9000),
       date: new Date().toLocaleString(),
       amount: amount,
       type: "Add Funds"
     };
-
-    // Pass the updated amount to update the balance in the parent component
-    updateBalances(user.balanceSavings + amount);
-    addTransactionToHistory(transaction, user.bankNumberS);
+    
+    const updatedBalance = user.balanceSavings + amount;
+    updateBalances(updatedBalance);
+    addTransactionToHistory(transaction, user.bankNumberS, null); 
+    setAmount(0); 
+    setShowSuccessPage(true)
+    showAlert('Add funds successful', 'success')
   };
 
   const handleClear = () => {
@@ -27,6 +41,9 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory }) => {
 
   return (
     <>
+      {showSuccessPage ? (
+        <SuccessLandingPage user={user}/>
+      ) : (
       <form className="flex justify-center mt-5 ml-1 ">
         <div>
             <div className="flex flex-col">
@@ -67,7 +84,7 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory }) => {
 
           
             <div className="flex flex-col justify-center bg-blue-100 rounded-md mt-2 p-3">
-                <div className="flex justify-center font-semibold text-white text-2xl lining-nums bg-blue-900">&#x20B1;{amount}</div>
+                <div className="flex justify-center font-semibold text-white text-2xl lining-nums bg-blue-900 rounded-md">&#x20B1;{amount}</div>
             </div>
 
             <div className="flex justify-center">
@@ -79,6 +96,7 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory }) => {
             </div>
           </div>
       </form>
+      )}
     </>
   );
 };

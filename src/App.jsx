@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard.jsx'
 import AlertComponent from './components/AlertBox.jsx'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
+
   function App() {
     const setInitialData = () => {
       const registeredAccounts = [
@@ -53,6 +54,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
   return (
       <div className="flex flex-col border-solid border-2 h-screen w-screen bg-slate-100 justify-center items-center">
         <main>
+        
+  
           {alert && <AlertComponent message={alert.message} type={alert.type} />}
           <Router>
             <Routes>

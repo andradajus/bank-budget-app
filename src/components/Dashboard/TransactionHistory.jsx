@@ -1,17 +1,44 @@
-const TransactionHistoryComponent = () => {
+import React, { useEffect, useState } from 'react';
+
+const TransactionHistoryComponent = ({ user }) => {
+  const [transactionHistory, setTransactionHistory] = useState([]);
+
+  useEffect(() => {
+    const fetchedTransactionHistory = JSON.parse(localStorage.getItem('transactionHistory')) || [];
+    setTransactionHistory(fetchedTransactionHistory);
+  }, []);
+
+  const filterTransactions = (transaction) => {
+    if (!user) return false; 
+    const senderAccountNumber = transaction.senderAccountNumber;
+    const recipientAccountNumber = transaction.recipientAccountNumber;
+    return senderAccountNumber === user.bankNumberS || recipientAccountNumber === user.bankNumberS;
+  };
+
   return (
     <>
-      <div className="flex justify-center">Transaction History</div>
-      <div className="flex justify-around">
-        <div>Transaction Number</div>
-        <div>Date</div>
-        <div>Amount</div>
-        <div>Type of Transaction</div>
-        <div>Sender Account Number if add funds then just type Add Funds</div>
-        <div>Receiver Account Number</div>
+      <div className="">
+        <div className="flex justify-center text-2xl mb-4">Transaction History</div>
+
+        <div className="flex flex-col">
+          {transactionHistory
+            .filter(filterTransactions)
+            .map((transaction, index) => (
+              <div key={index} className="flex justify-around mb-2">
+                <div className="bg-blue-100 rounded-md p-4">
+                  <div>Transaction Number: {transaction.transactionNumber}</div>
+                  <div>Date: {transaction.date}</div>
+                  <div>Amount: {transaction.amount}</div>
+                  <div>Type: {transaction.type}</div>
+                  <div>Sender Account: {transaction.senderAccountNumber}</div>
+                  <div>Recipient Account: {transaction.recipientAccountNumber}</div>
+                </div>
+              </div>
+            ))}
+        </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default TransactionHistoryComponent
+export default TransactionHistoryComponent;

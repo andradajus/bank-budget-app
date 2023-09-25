@@ -11,14 +11,22 @@ import AddFunds from './Dashboard/AddFunds'
 import BudgetTracker from './Dashboard/BudgetTracker'
 import TransactionHistoryComponent from './Dashboard/TransactionHistory'
 
-    const Dashboard = ({user, accountInfo, alert}) => {
+    const Dashboard = ({user, accountInfo}) => {
         const navigate = useNavigate()
         const [transactionHistory, setTransactionHistory] = useState([]);
+        const [alert, setAlert] = useState(null);
         const [balances, setBalances] = useState({
           savings: user.balanceSavings || 0,
           checking: user.balanceChecking || 0,
         })
       
+        const showAlert = (message, type) => {
+          setAlert({ message, type })
+          setTimeout(() => {
+            setAlert(null)
+          }, 3000)
+        }
+
       const updateBalances = (savings, checking) => {
           setBalances({ savings, checking });
       }
@@ -89,14 +97,14 @@ import TransactionHistoryComponent from './Dashboard/TransactionHistory'
                   </div>
               </div>
             </div>
-          <div className="bg-blue-200 shadow-md rounded col-span-3 row-span-3 col-start-1 row-start-2 h- ms-24 grow-0">
+          <div className="bg-blue-200 shadow-md rounded col-span-3 row-span-3 col-start-1 row-start-2 h- ms-24 overflow-auto">
               <Routes>
-                <Route path="/account-balance" element={<AccountBalance user={user} accountInfo={accountInfo} balances={balances}/>} />
-                <Route path="/enroll-account" element={<EnrollAccount user={user} />} />
-                <Route path="/transaction-history" element={<TransactionHistoryComponent user={user} />} />
-                <Route path="/add-funds" element={<AddFunds user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} />} />
-                <Route path="/fund-transfer" element={<FundTransfer user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} />} />
-                <Route index element={<DashboardHome user={user} accountInfo={accountInfo} balances={balances} />} />
+                <Route path="/account-balance" element={<AccountBalance user={user} accountInfo={accountInfo} balances={balances} showAlert={showAlert}/>} />
+                <Route path="/enroll-account" element={<EnrollAccount user={user} showAlert={showAlert}/>} />
+                <Route path="/transaction-history" element={<TransactionHistoryComponent user={user} showAlert={showAlert}/>} />
+                <Route path="/add-funds" element={<AddFunds user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} showAlert={showAlert}/>} />
+                <Route path="/fund-transfer" element={<FundTransfer user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} showAlert={showAlert}/>} />
+                <Route index element={<DashboardHome user={user} accountInfo={accountInfo} balances={balances} showAlert={showAlert}/>} />
              </Routes>
           </div>
           <div className="bg-blue-200 shadow-md rounded col-span-3 col-start-1 row-start-5 h-auto ms-24 overflow-auto">
@@ -114,7 +122,7 @@ import TransactionHistoryComponent from './Dashboard/TransactionHistory'
     <div key={index} className="flex rounded-md m-1 justify-evenly">
       <div className="bg-green-200 flex justify-between rounded-md w-full">
         <div>{transaction.transactionNumber}</div>
-        <div className="pl-1ik0">{transaction.date}</div>
+        <div className="pl-1">{transaction.date}</div>
         <div className="pr-8">&#x20B1;{transaction.amount}</div>
         <div>{transaction.type}</div>
       </div>
@@ -123,7 +131,7 @@ import TransactionHistoryComponent from './Dashboard/TransactionHistory'
       </div>
         </div>
       </div>
-          <div className="bg-blue-200 shadow-md rounded col-span-2 row-span-4 col-start-4 row-start-1 mt-2 w-auto"><BudgetTracker /></div>
+          <div className="bg-blue-200 shadow-md rounded col-span-2 row-span-4 col-start-4 row-start-1 mt-2 w-auto"><BudgetTracker user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} /></div>
           <div className="flex bg-blue-200 shadow-md rounded w-auto">Currency Exchange Rate here</div>
     </div>
   </div>

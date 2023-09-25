@@ -3,7 +3,6 @@ import {useState} from 'react'
 import SelectCountry from './ZFunctionalComponent/SelectCountry.jsx'
 import { useNavigate } from 'react-router-dom'
 import SelectBirthday from './ZFunctionalComponent/SelectBirthday.jsx'
-import showAlert from './AlertBox.jsx'
 
 const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
     const [password, setPassword] = useState('')

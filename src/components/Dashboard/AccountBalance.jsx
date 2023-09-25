@@ -1,8 +1,27 @@
-import React from 'react'
+import {useState, useEffect} from 'react'
 import SideBar from '../SideBar'
 import { useNavigate } from 'react-router-dom'
 
-const AccountBalance = ({ user,balances }) => {
+const AccountBalance = ({ user, balances, updateBalances }) => {
+  const [savingsBalance, setSavingsBalance] = useState(balances.savings || 0);
+  const [checkingBalance, setCheckingBalance] = useState(balances.checking || 0);
+
+  useEffect(() => {
+    setSavingsBalance(balances.savings || 0);
+    setCheckingBalance(balances.checking || 0);
+  }, [balances]);
+
+  // Function to update the savings balance
+  const updateSavingsBalance = (newBalance) => {
+    setSavingsBalance(newBalance);
+    updateBalances(newBalance, checkingBalance);
+  };
+
+  // Function to update the checking balance
+  const updateCheckingBalance = (newBalance) => {
+    setCheckingBalance(newBalance);
+    updateBalances(savingsBalance, newBalance);
+  };
 
   return (
     <>
@@ -31,7 +50,7 @@ const AccountBalance = ({ user,balances }) => {
             {user.balanceChecking !== undefined && (
               <div className="flex flex-col justify-center">
               <h2 className="flex justify-center text-gray-700 font-bold text-3xl">Checking Account Balance</h2>
-              <div className="flex justify-center font-semibold text-slate-800 text-xl lining-nums">&#x20B1;{balances.checking.toLocaleString() || "N/A" }</div>
+              <div className="flex justify-center font-semibold text-slate-800 text-xl lining-nums">N/A Under Construction</div>
               </div>
             )}
            
