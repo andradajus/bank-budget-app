@@ -3,6 +3,7 @@ import {useState} from 'react'
 import SelectCountry from './ZFunctionalComponent/SelectCountry.jsx'
 import { useNavigate } from 'react-router-dom'
 import SelectBirthday from './ZFunctionalComponent/SelectBirthday.jsx'
+import { Input } from "@material-tailwind/react";
 
 const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
     const [password, setPassword] = useState('')
@@ -157,27 +158,23 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
         <form className="flex flex-col bg-gradient-to-l from-blue-200 via-blue-100 to-blue-300 p-6 rounded w-4/5 mx-auto min-h" onSubmit={handleSubmit}>
         <div className="flex align-center justify-center rounded leading-normal text-3xl md:text font-bold pb-4">Register an Account</div>
 
-        <div className="bg-white shadow-md rounded p-5 mb-4 flex w-full">
+        <div className="bg-white shadow-md rounded p-5 mb-4 flex w-full justify-between">
           <div>
-              <label className="pr-2">Username<span className="text-red-600">*</span></label> 
-              <input   
-                className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-red-300 invalid:text-red-300 
-                focus:ring-blue-500 focus:border-blue-500 "
-                type="text"
+              <Input
+                className="w-72"
+                size="lg"   
+                label="Username"
                 id="username"
                 value={username}
                 onChange={handleUsernameChange}
                 required
               />
           </div>
+
           <div>
-            <label className="pr-2">Email Address<span className="text-red-600">*</span></label>
-            <input
-                className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline
-                 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-red-300 invalid:text-red-300 w-80
-                focus:ring-blue-500 focus:border-blue-500"
+            <Input
+               className="w-72 "
+               size="lg"
                 type="email"                                                 
                 label="Email Address"
                 id="email"
@@ -190,12 +187,8 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
 
         <div className="bg-white shadow-md rounded p-4 mb-3 flex w-full justify-between flex-row">
           <div>
-            <label className="pr-2">First Name<span className="text-red-600">*</span></label>
-            <input
-                className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline
-                disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-               invalid:border-red-300 invalid:text-red-300 w-50
-               focus:ring-blue-500 focus:border-blue-500"
+            <Input
+               size="lg"
                 type="text"                                     
                 label="First Name"
                 id="firstName"
@@ -206,12 +199,7 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
           </div>
 
           <div>
-            <label className="pr-2 pl-2">Middle Name</label>
-            <input
-                className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline
-                disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-               invalid:border-red-300 invalid:text-red-300 w-50
-               focus:invalid:border-red-300 focus:invalid:ring-red-300  focus:ring-blue-500 focus:border-blue-500"
+            <Input
                 type="text"
                 label="Middle Name"
                 id="middleName"
@@ -219,15 +207,8 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
                 onChange={handleMiddleNameChange}
             />
           </div>
-
-
           <div>
-            <label className="pr-2 pl-2">Last Name<span className="text-red-600">*</span></label>
-            <input
-                className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline
-                disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-               invalid:border-red-300 invalid:text-red-300 w-50
-               focus:ring-blue-500 focus:border-blue-500"
+            <Input
                 type="text"
                 label="Last Name"
                 id="lastName"
@@ -247,11 +228,7 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
 
           <div className="bg-white shadow-md rounded p-4 mb-3 flex w-full justify-between">
             <div className="flex flex-col">
-              <label>Password<span className="text-red-600">*</span></label>
-              <input
-                  className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                  invalid:border-red-300 invalid:text-red-300
-                  focus:ring-blue-500 focus:border-blue-500" 
+              <Input 
                   type="password"
                   label="Password"
                   id="password"
@@ -262,11 +239,7 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
             </div>
 
             <div className="flex flex-col">
-              <label>Confirm Password<span className="text-red-600">*</span></label>
-              <input
-                  className="shadow appearance-none border rounded py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                  invalid:border-red-300 invalid:text-red-300
-                  focus:ring-blue-500 focus:border-blue-500" 
+              <Input
                   type="password"
                   label="Confirm Password" 
                   id="confirmPassword"  

@@ -10,25 +10,13 @@ import DashboardHome from './Dashboard/Home'
 import AddFunds from './Dashboard/AddFunds'
 import BudgetTracker from './Dashboard/BudgetTracker'
 import TransactionHistoryComponent from './Dashboard/TransactionHistory'
-import { PencilIcon } from "@heroicons/react/24/solid";
-import {
-  ArrowDownTrayIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
 import {
   Card,
-  CardHeader,
+  CardBody,
+  CardFooter,
   Typography,
   Button,
-  CardBody,
-  Chip,
-  CardFooter,
-  Avatar,
-  IconButton,
-  Tooltip,
-  Input,
 } from "@material-tailwind/react";
-
 
     const Dashboard = ({user, accountInfo}) => {
         const navigate = useNavigate()
@@ -91,11 +79,11 @@ import {
   <>
   <SideBar />
   {alert && <AlertComponent message={alert.message} type={alert.type} />}
-  <div className="bg-blue-100 h-screen w-screen max-h-full">
+  <div className="bg-green-600 h-screen w-screen max-h-full">
     <div className="grid grid-cols-5 grid-rows-5 gap-4">
-              <div className="bg-blue-200 shadow-md rounded col-span-3 h-auto ms-24 mt-2 max-h-full">
-                <div className="flex p-1  flex-col">
-                  <div className="flex flex-row place-content-around">
+              <div className="bg-amber-200 shadow-md rounded col-span-3 ms-24 mt-2">
+                <div className="bg-indigo-500 flex p-1 flex-col">
+                  <div className="bg-blue-gray-800 flex flex-row place-content-around">
                       <div className="bg-blue-100 shadow-md rounded p-2 pl-16 pr-16 hover:scale-105 transition duration-300 ease-in-out ">
                           <div className=" rounded leading-normal text-3xl md:text font-bold">Welcome,</div> 
                           <div className="flex uppercase rounded leading-normal text-2xl md:text ">{user?.firstName}</div>
@@ -111,9 +99,9 @@ import {
                         <div className="flex">Checking Account</div>
                         <div className="font-semibold text-slate-800 text-xl lining-nums">&#x20B1;{balances.checking}</div>
                       </div>
-
                     </div>
                   </div>
+
               </div>
             </div>
           <div className="bg-blue-200 shadow-md rounded col-span-3 row-span-3 col-start-1 row-start-2 h- ms-24 overflow-auto">
@@ -127,7 +115,7 @@ import {
              </Routes>
           </div>
           <div className="bg-blue-200 shadow-md rounded col-span-3 col-start-1 row-start-5 h-auto ms-24 overflow-auto">
-            <div className="overflow-auto">
+            <div className="overflow-scroll">
       <h2 className="flex justify-center text-2xl font-extrabold">Transaction History</h2>
       <table className="table-auto">
         <thead>

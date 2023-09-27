@@ -20,9 +20,12 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory, showAlert }) 
       updateBalances(userAccount.balanceSavings);
     }
   
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' });
+
     const transaction = {
       transactionNumber: Math.floor(1000 + Math.random() * 9000),
-      date: new Date().toLocaleString(),
+      date: formattedDate,
       amount: amount,
       type: "Add Funds"
     };

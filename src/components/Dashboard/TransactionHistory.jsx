@@ -13,8 +13,6 @@ import {
   Chip,
   CardFooter,
   Avatar,
-  IconButton,
-  Tooltip,
   Input,
 } from "@material-tailwind/react";
 
@@ -34,10 +32,105 @@ const TransactionHistoryComponent = ({ user }) => {
     return senderAccountNumber === user.bankNumberS || recipientAccountNumber === user.bankNumberS;
   };
 
+  const filteredTransactions = transactionHistory.filter(filterTransactions);
+
+  const renderTableRows = () => {
+    return transactionHistory
+      .filter(filterTransactions)
+      .map((transaction, index) => {
+        const isLast = index === transactionHistory.length - 1;
+        const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+
+        return (
+          <tr key={index}>
+            <td className={classes}>
+              <div className="flex items-center gap-3">
+                <Avatar
+                  src={transaction.img}
+                  size="md"
+                  className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                />
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="font-bold"
+                >
+                  {transaction.date}
+                </Typography>
+              </div>
+            </td>
+
+            <td className={classes}>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-bold"
+              >
+                {transaction.transactionNumber}
+              </Typography>
+            </td>
+
+            <td className={classes}>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-bold"
+              >
+                &#x20B1;{transaction.amount}
+              </Typography>
+            </td>
+            <td className={classes}>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-bold"
+              >
+                {transaction.type}
+              </Typography>
+            </td>
+            <td className={classes}>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-bold"
+              >
+                {transaction.senderAccountNumber}
+              </Typography>
+            </td>
+            <td className={classes}>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-bold"
+              >
+                {transaction.recipientAccountNumber}
+              </Typography>
+            </td>
+            <td className={classes}>
+              <div className="w-max">
+                <Chip
+                  size="sm"
+                  variant="ghost"
+                  value={status}
+                  color={
+                    status === "paid"
+                      ? "green"
+                      : status === "pending"
+                        ? "amber"
+                        : "red"}
+                />
+              </div>
+            </td>
+          </tr>
+        )
+      })
+  }
+
   const TABLE_HEAD = ["Date and Time", "Transaction No.", "Amount", "Type", "Sender Account", "Recipient Account", "Status"]
-  const TABLE_ROWS = []
 
   return (
+
+    <>
       <Card className="h-full w-full">
         <CardHeader floated={false} shadow={false} className="rounded-none">
           <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
@@ -79,120 +172,21 @@ const TransactionHistoryComponent = ({ user }) => {
                   </th>
                 ))}
               </tr>
-
             </thead>
 
             <tbody>
-              {TABLE_ROWS.map(
-                (
-                  {
-                    img,
-                    name,
-                    amount,
-                    date,
-                    status,
-                    account,
-                    accountNumber,
-                    expiry,
-                  },
-                  index,
-                ) => {
-                  const isLast = index === TABLE_ROWS.length - 1;
-                  const classes = isLast
-                    ? "p-4"
-                    : "p-4 border-b border-blue-gray-50";
-
-                  return (
-                    {transactionHistory.filter(filterTransactions).map((transaction, index) => (
-                          <tr key={index}>
-                            <td className={classes}>
-                              <div className="flex items-center gap-3">
-                                <Avatar
-                                  src={img}
-                                  alt={type}
-                                  size="md"
-                                  className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
-                                />
-                                <Typography
-                                  variant="small"
-                                  color="blue-gray"
-                                  className="font-bold"
-                                >
-                                  {transaction.date}
-                                </Typography>
-                              </div>
-                            </td>
-
-                            <td className={classes}>
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-bold"
-                              >
-                                {transaction.transactionNumber}
-                              </Typography>
-                            </td>
-
-                            <td className={classes}>
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-bold"
-                              >
-                                &#x20B1;{transaction.amount}
-                              </Typography>
-                            </td>
-                            <td className={classes}>
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-bold"
-                              >
-                                {transaction.type}
-                              </Typography>
-                            </td>
-                            <td className={classes}>
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-bold"
-                              >
-                                {transaction.senderAccountNumber}
-                              </Typography>
-                            </td>
-                            <td className={classes}>
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-bold"
-                              >
-                                {transaction.recipientAccountNumber}
-                              </Typography>
-                            </td>
-                            <td className={classes}>
-                              <div className="w-max">
-                                <Chip
-                                  size="sm"
-                                  variant="ghost"
-                                  value={status}
-                                  color={
-                                    status === "paid"
-                                      ? "green"
-                                      : status === "pending"
-                                        ? "amber"
-                                        : "red"}
-                                />
-                              </div>
-                            </td>
-                          </tr>
-                  ))})
-                                  })}
-           </tbody>           
+              {renderTableRows()}
+            </tbody>
           </table>
+          <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+            <Button variant="outlined" size="sm">Previous</Button>
+            <Button variant="outlined" size="sm">Next</Button>
+          </CardFooter>
         </CardBody>
       </Card >
+    </>
   )
 }
-  
-      
+
+
 export default TransactionHistoryComponent;
