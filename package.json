@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "@material-tailwind/react": "^2.1.2",
+    "date-fns": "^2.30.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "postcss-cli": "^10.1.0",

@@ -14,6 +14,7 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
     const [lastName, setLastName] = useState('')
     const [birthDate, setBirthDate] = useState('')
     const [email, setEmail] = useState('')
+    const parsedAccount  = JSON.parse(localStorage.getItem('accounts'))
     const navigate = useNavigate()
 
     const handleCountryChange = (e) => {
@@ -29,9 +30,20 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
     }
 
     const handleUsernameChange = (e) => {
-        setUsername(e.target.value)  
+        const inputUsername = e.target.value
+        setUsername(inputUsername)  
+
+        const isUsernameTaken = usernameChecker(inputUsername)
+        if(isUsernameTaken) {
+          showAlert('The username is already taken', 'error')
+        }
       }
-    
+
+    const usernameChecker = (inputUsername) => {
+      return parsedAccount.some(account => account.username === inputUsername);
+    }
+
+      
       const handleFirstNameChange = (e) => {
         setFirstName(e.target.value)
       }
@@ -46,7 +58,17 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
     
     
       const handleEmailChange = (e) => {
-        setEmail(e.target.value)
+        const inputEmail = e.target.value
+        setEmail(inputEmail)  
+
+        const isEmailTaken = emailChecker(inputEmail)
+        if(isEmailTaken) {
+          showAlert('The Email is already taken', 'error')
+        }
+      }
+
+      const emailChecker = (inputEmail) => {
+        return parsedAccount.some(account => account.email === inputEmail);
       }
 
       const handleBirthDateChange = (e) => {
@@ -56,18 +78,58 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
       const handleSubmit = (e) => {
         e.preventDefault()
 
-      
-    
+        if (username === "" ) {
+          showAlert("Do not leave the username field blank", 'error')
+          return
+        }
+
+        const isUsernameTaken = usernameChecker(username)
+        if(isUsernameTaken) {
+          showAlert('The username is already taken', 'error');
+          return
+        }
+
+        if (email === "" ) {
+          showAlert("Do not leave the Email field blank", 'error')
+          return
+        }
+
+        const isEmailTaken = emailChecker(email)
+        if(isEmailTaken) {
+          showAlert('The Email is already taken', 'error');
+          return
+        }
+
+        if (firstName === "" ) {
+          showAlert("Do not leave the First Name field blank", 'error')
+          return
+        }
+
+        if (lastName === "" ) {
+          showAlert("Do not leave the Last Name field blank", 'error')
+          return
+        }
+
+        if (birthDate === "" ) {
+          showAlert("Do not leave the Birthdate field blank", 'error')
+          return
+        }
+
+        if (selectCountry === "" ) {
+          showAlert("Do not leave the Country field blank", 'error')
+          return
+        }
+
+        if (password === "" ) {
+          showAlert("DO not leave the Password field blank", 'error')
+          return
+        }
+
         if (password !== confirmPassword) {
           showAlert('Password does not match', 'error');
           return;
-        }
-         
-         console.log('success')
-         
+        }       
          const randomEightDigitNumber = Math.floor(10000000 + Math.random() * 90000000)
-
-    
          const accountNumberSavings = `100-${randomEightDigitNumber}-1`
          const formData = {
             username,
@@ -81,7 +143,6 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
             balanceSavings: 0, 
             bankNumberC: '', 
             balanceChecking: 0, 
-            transactionHistory: []
           } 
 
         handleNewUserRegistration(formData)
@@ -117,7 +178,7 @@ const RegistrationForm = ({handleNewUserRegistration, showAlert}) => {
                  disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                 invalid:border-red-300 invalid:text-red-300 w-80
                 focus:ring-blue-500 focus:border-blue-500"
-                type="email"                                                    //for polishing: add validation of repeated on local storage
+                type="email"                                                 
                 label="Email Address"
                 id="email"
                 value={email}

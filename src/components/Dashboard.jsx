@@ -10,6 +10,25 @@ import DashboardHome from './Dashboard/Home'
 import AddFunds from './Dashboard/AddFunds'
 import BudgetTracker from './Dashboard/BudgetTracker'
 import TransactionHistoryComponent from './Dashboard/TransactionHistory'
+import { PencilIcon } from "@heroicons/react/24/solid";
+import {
+  ArrowDownTrayIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
+import {
+  Card,
+  CardHeader,
+  Typography,
+  Button,
+  CardBody,
+  Chip,
+  CardFooter,
+  Avatar,
+  IconButton,
+  Tooltip,
+  Input,
+} from "@material-tailwind/react";
+
 
     const Dashboard = ({user, accountInfo}) => {
         const navigate = useNavigate()
@@ -109,26 +128,28 @@ import TransactionHistoryComponent from './Dashboard/TransactionHistory'
           </div>
           <div className="bg-blue-200 shadow-md rounded col-span-3 col-start-1 row-start-5 h-auto ms-24 overflow-auto">
             <div className="overflow-auto">
-        <div className="flex justify-center">Transaction History</div>
-        <div className="bg-blue-100 rounded-md m-1">
-          <div className="flex flex-row justify-between overflow-auto">
-            <div>Reference</div>
-            <div>Date</div>
-            <div>Amount</div>
-            <div>Type</div>
-          </div>
-
+      <h2 className="flex justify-center text-2xl font-extrabold">Transaction History</h2>
+      <table className="table-auto">
+        <thead>
+          <tr>
+            <th>Reference No.</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
           {getFilteredTransactionHistory(user.bankNumberS).map((transaction, index) => (
-    <div key={index} className="flex rounded-md m-1 justify-evenly">
-      <div className=" hover:scale-105 transition duration-300 ease-in-out flex cursor-default justify-between rounded-md w-full   hover:opacity-40">
-        <div>{transaction.transactionNumber}</div>
-        <div className="pl-1">{transaction.date}</div>
-        <div className="pr-8">&#x20B1;{transaction.amount}</div>
-        <div>{transaction.type}</div>
-      </div>
-    </div>
-  ))}
-      </div>
+        <tr key={index}>
+          <td>{transaction.transactionNumber}</td>
+          <td>{transaction.date}</td>
+          <td>&#x20B1;{transaction.amount}</td>
+          <td>{transaction.type}</td>
+        </tr>
+       ))}
+        </tbody>
+      </table>
+  
         </div>
       </div>
           <div className="bg-blue-200 shadow-md rounded col-span-2 row-span-4 col-start-4 row-start-1 mt-2 w-auto"><BudgetTracker user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} /></div>
