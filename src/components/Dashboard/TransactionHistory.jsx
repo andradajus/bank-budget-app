@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {MagnifyingGlassIcon} from "@heroicons/react/24/outline";
 import { Chip, Avatar,Input,} from "@material-tailwind/react";
 
-
 const TransactionHistoryComponent = ({ user }) => {
   const [transactionHistory, setTransactionHistory] = useState([]);
 
@@ -31,10 +30,6 @@ const TransactionHistoryComponent = ({ user }) => {
           <tr key={index}>
             <td className={classes}>
               <div className="flex items-center gap-3">
-                <img
-                  src={transaction.img}
-                  className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain rounded-full p-3"
-                />
                 <div
                   className="text-sm"
                 >

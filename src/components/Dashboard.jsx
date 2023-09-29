@@ -31,7 +31,7 @@ const Dashboard = ({ user, accountInfo }) => {
 
   const updateBalances = (savings, checking) => {
     setBalances({ savings, checking });
-  }
+  };
 
   const getFilteredTransactionHistory = (userBankNumber) => {
     console.log('User Bank Number:', userBankNumber);
@@ -110,7 +110,7 @@ const Dashboard = ({ user, accountInfo }) => {
           </Routes>
         </div>
 
-        <div className="bg-blue-100 col-span-7 row-span-2 col-start-2 row-start-5 mt-4">
+        <div className="bg-blue-100 rounded-md col-span-7 row-span-2 col-start-2 row-start-5 mt-4">
           <div className="overflow-scroll">
             <h2 className="flex justify-center text-2xl font-extrabold">Transaction History</h2>
             <table className="table-auto w-full">
@@ -136,8 +136,9 @@ const Dashboard = ({ user, accountInfo }) => {
           </div>
         </div>
 
-        <div className="bg-amber-400 col-span-4 row-span-4 col-start-9 row-start-1">
-          {/* Content for col 9, row 1 */}
+        <div className="bg-amber-400 col-span-4 row-span-4 col-start-9 row-start-1 h-full">
+        <BudgetTracker user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} showAlert={showAlert}
+          setBalances={setBalances} />
         </div>
 
         <div className="bg-pink-200 col-span-4 row-span-2 col-start-9 row-start-5">
@@ -149,9 +150,6 @@ const Dashboard = ({ user, accountInfo }) => {
       {/*
 
 
-            <div className="bg-blue-200 shadow-md rounded col-span-2 row-span-4 col-start-4 row-start-1 mt-2 w-auto">
-              <BudgetTracker user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} />
-            </div>
           <div className="flex bg-blue-200 shadow-md rounded w-auto">Currency Exchange Rate here</div>
         </div>
       </div> */}

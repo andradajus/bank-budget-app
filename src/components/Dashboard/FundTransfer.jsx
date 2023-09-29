@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SuccessLandingPage from "../SuccessLandingPage";
+import withdrawImage from '../ZFunctionalComponent/Icons/withdraw.png'
 
 
 const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory, showAlert }) => {
@@ -66,7 +67,7 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory,
       transactionNumber: Math.floor(1000 + Math.random() * 9000),
       date: formattedDate,
       amount: parseFloat(amount).toFixed(2),
-      type: 'Fund Transfer'
+      type: 'Fund Transfer',
     };
     
     

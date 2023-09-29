@@ -24,13 +24,13 @@ const SideBar = () => {
     <>
       <div className="fixed top-0 left-0 h-screen w-20 m-0 flex flex-col bg-gradient-to-l from-blue-800 via-blue-900 to-blue-800  text-white shadow-2xl rounded ">
         <div className="flex flex-col">
-          <SideBarLink icon={myAccountImage} text="My Profile" to="/home/my-profile" user={user} />
+          <SideBarLink icon={myAccountImage} text="My Profile" to="/home/my-profile" />
           <SideBarLink icon={balanceImage} text="Bank Details" to="/home/account-balance" />
           <SideBarLink icon={historyImage} text="Transaction History" to="/home/transaction-history" />
           <SideBarLink icon={depositImage} text="Add Funds or Deposit" to="/home/add-funds" />
           <SideBarLink icon={withdrawImage} text="Send or Withdraw" to="/home/fund-transfer" />
-          <SideBarLink icon={billsImage} text="Bills Payment" to="/home/bills-payment" />
-          <SideBarLink icon={enrollImage} text="Enroll Account" to="/home/enroll-account" />
+          {/* <SideBarLink icon={billsImage} text="Bills Payment" to="/home/bills-payment" /> */}
+          {/* <SideBarLink icon={enrollImage} text="Enroll Account" to="/home/enroll-account" /> */}
           <SideBarLink icon={logoutImage} text="Logout" to="/login" onClick={handleLogout} className="self-end" />
         </div>
       </div>
