@@ -147,9 +147,9 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory,
     {showSuccessPage ? (
         <SuccessLandingPage user={user}/>
       ) : (
-    <div>
-      <div className="bg-blue-100 shadow-md rounded p-4 mb-3 flex flex-col">
-        <div className="block mb-2 text-m font-medium text-gray-900 dark:text-white">Choose Account</div>
+    <div className="h-full">
+      <div className="bg-blue-100 shadow-md rounded p-1 pl-2 mb-3 flex flex-col">
+        <div className="block mb-2 text-m font-medium text-gray-900 dark:text-white h-full">Choose Account</div>
         <select className=" flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                     focus:ring-blue-500 focus:border-blue-500 w-auto p-2.5 dark:bg-gray-700
                      dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
@@ -160,7 +160,7 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory,
           {user && user.bankNumberC && <option value="checking">Checking Account</option>}
         </select>
         {selectedAccount && (
-        <div>
+        <div className="mt-1">
           {senderAccount.bankNumber && (
             <>
               <h2 className="block text-gray-700 text-sm font-bold mb-2">
@@ -173,7 +173,7 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory,
       </div>
 
 
-          <div className="bg-blue-100 shadow-md rounded p-4 mb-3 flex flex-row justify-around">
+          <div className="bg-blue-100 shadow-md rounded p-2 mb-3 flex flex-row justify-around">
         <div className="flex flex-col">
           <div className="flex flex-row">
             <div className="justify-center content-center">

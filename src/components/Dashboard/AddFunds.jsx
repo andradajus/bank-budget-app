@@ -13,13 +13,13 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory, showAlert }) 
   const handleAddFundsClick = () => {
     const updatedAccounts = JSON.parse(localStorage.getItem('accounts')) || [];
     const userAccount = updatedAccounts.find(account => account.bankNumberS === user.bankNumberS);
-  
+
     if (userAccount) {
       userAccount.balanceSavings += amount;
       localStorage.setItem('accounts', JSON.stringify(updatedAccounts));
       updateBalances(userAccount.balanceSavings);
     }
-  
+
     const now = new Date();
     const formattedDate = now.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
@@ -29,11 +29,11 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory, showAlert }) 
       amount: amount,
       type: "Add Funds"
     };
-    
+
     const updatedBalance = user.balanceSavings + amount;
     updateBalances(updatedBalance);
-    addTransactionToHistory(transaction, user.bankNumberS, null); 
-    setAmount(0); 
+    addTransactionToHistory(transaction, user.bankNumberS, null);
+    setAmount(0);
     setShowSuccessPage(true)
     showAlert('Add funds successful', 'success')
   };
@@ -45,12 +45,16 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory, showAlert }) 
   return (
     <>
       {showSuccessPage ? (
-        <SuccessLandingPage user={user}/>
+        <SuccessLandingPage user={user} />
       ) : (
-      <form className="flex justify-center mt-5 ml-1 ">
-        <div>
+        <form className="flex justify-center mt-1 ml-1 ">
+          <div>
             <div className="flex flex-col">
-              <div className="flex flex-col bg-blue-100 rounded-md">
+            <div className="flex flex-col justify-center bg-blue-100 rounded-md p-3">
+              <div className="flex justify-center font-semibold text-white text-2xl lining-nums bg-blue-900 rounded-md">&#x20B1;{amount}</div>
+            </div>
+
+              <div className="flex flex-col bg-blue-100 rounded-md mt-2">
                 <div className="flex justify-center mb-2 text-m font-medium text-gray-900 dark:text-white">Choose an Amount</div>
                 <div className="flex justify-around">
                   <ButtonClass text="1" onClick={() => handleAddFunds(1)} />
@@ -67,55 +71,48 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory, showAlert }) 
                 </div>
 
                 <div className="flex justify-around">
-                  <ButtonClass text="3000" onClick={() => handleAddFunds(5000)} />  
                   <ButtonClass text="5000" onClick={() => handleAddFunds(5000)} />
                   <ButtonClass text="10000" onClick={() => handleAddFunds(10000)} />
-                  <ButtonClass text="50000" onClick={() => handleAddFunds(50000)} />
-                </div>
-
-                <div className="flex justify-around">
-                  <ButtonClass text="100000" onClick={() => handleAddFunds(100000)} />
-                  <ButtonClass text="500000" onClick={() => handleAddFunds(5000000)} />
-                  <ButtonClass text="1000000" onClick={() => handleAddFunds(1000000)} />
-                  <span 
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 
-                  rounded cursor-pointer mx-3 my-1 h-10 w-20 flex justify-center" 
-                  onClick={handleClear}>Clear</span>
+                  <ButtonClass text="20000" onClick={() => handleAddFunds(20000)} />
+                  <span
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 
+                  rounded cursor-pointer mx-3 my-1 h-10 w-20 flex justify-center"
+                    onClick={handleClear}>
+                    Clear
+                  </span>
                 </div>
               </div>
             </div>
 
-          
-            <div className="flex flex-col justify-center bg-blue-100 rounded-md mt-2 p-3">
-                <div className="flex justify-center font-semibold text-white text-2xl lining-nums bg-blue-900 rounded-md">&#x20B1;{amount}</div>
-            </div>
+
+           
 
             <div className="flex justify-center">
               <button className="flex justify-center bg-blue-500
-               hover:bg-blue-700 rounded-md text-white font-bold py-2 px-4 mt-2 " 
-               type="button" onClick={handleAddFundsClick}>
-              Add Funds
+               hover:bg-blue-700 rounded-md text-white font-bold py-2 px-4 mt-2 "
+                type="button" onClick={handleAddFundsClick}>
+                Add Funds
               </button>
             </div>
           </div>
-      </form>
+        </form>
       )}
     </>
   );
 };
 
-const ButtonClass = ({text, onClick}) => {
+const ButtonClass = ({ text, onClick }) => {
   const formatWithCommas = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
   const formattedText = formatWithCommas(text);
   return (
-      <span
+    <span
       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 
       rounded cursor-pointer mx-3 my-1 h-10 w-20 flex justify-center"
       onClick={onClick}
     >
-    {formattedText}
+      {formattedText}
     </span>
   )
 }

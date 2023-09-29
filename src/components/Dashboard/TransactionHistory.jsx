@@ -1,20 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { PencilIcon } from "@heroicons/react/24/solid";
-import {
-  ArrowDownTrayIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
-import {
-  Card,
-  CardHeader,
-  Typography,
-  Button,
-  CardBody,
-  Chip,
-  CardFooter,
-  Avatar,
-  Input,
-} from "@material-tailwind/react";
+import {MagnifyingGlassIcon} from "@heroicons/react/24/outline";
+import { Chip, Avatar,Input,} from "@material-tailwind/react";
 
 
 const TransactionHistoryComponent = ({ user }) => {
@@ -45,80 +31,52 @@ const TransactionHistoryComponent = ({ user }) => {
           <tr key={index}>
             <td className={classes}>
               <div className="flex items-center gap-3">
-                <Avatar
+                <img
                   src={transaction.img}
-                  size="md"
-                  className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                  className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain rounded-full p-3"
                 />
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="font-bold"
+                <div
+                  className="text-sm"
                 >
                   {transaction.date}
-                </Typography>
+                </div>
               </div>
             </td>
 
             <td className={classes}>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-bold"
+              <div
+                className="text-center text-sm"
               >
                 {transaction.transactionNumber}
-              </Typography>
+              </div>
             </td>
 
             <td className={classes}>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-bold"
+              <div
+                className="text-sm"
               >
                 &#x20B1;{transaction.amount}
-              </Typography>
+              </div>
             </td>
             <td className={classes}>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-bold"
+              <div
+                className="text-sm"
               >
                 {transaction.type}
-              </Typography>
+              </div>
             </td>
             <td className={classes}>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-bold"
+              <div
+                className="text-sm"
               >
                 {transaction.senderAccountNumber}
-              </Typography>
+              </div>
             </td>
             <td className={classes}>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="font-bold"
+              <div
+                className="text-sm"
               >
                 {transaction.recipientAccountNumber}
-              </Typography>
-            </td>
-            <td className={classes}>
-              <div className="w-max">
-                <Chip
-                  size="sm"
-                  variant="ghost"
-                  value={status}
-                  color={
-                    status === "paid"
-                      ? "green"
-                      : status === "pending"
-                        ? "amber"
-                        : "red"}
-                />
               </div>
             </td>
           </tr>
@@ -126,34 +84,37 @@ const TransactionHistoryComponent = ({ user }) => {
       })
   }
 
-  const TABLE_HEAD = ["Date and Time", "Transaction No.", "Amount", "Type", "Sender Account", "Recipient Account", "Status"]
+  const TABLE_HEAD = ["Date", "Transaction No.", "Amount", "Type", "Sender Account", "Recipient Account"]
 
   return (
 
     <>
-      <Card className="h-full w-full">
-        <CardHeader floated={false} shadow={false} className="rounded-none">
+      <div className="h-full w-full rounded-md bg-blue-100 p-2 overflow-scroll">
+        <div className="rounded-none">
           <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
             <div>
-              <Typography variant="h5" color="blue-gray">
+              <p>
                 Recent Transactions
-              </Typography>
-              <Typography color="gray" className="mt-1 font-normal">
+              </p>
+
+              <p className="mt-1 font-normal">
                 These are details about the last transactions
-              </Typography>
+              </p>
             </div>
+
             <div className="flex w-full shrink-0 gap-2 md:w-max">
               <div className="w-full md:w-72">
                 <Input
+                  className="bg-color-white"
                   label="Search"
                   icon={<MagnifyingGlassIcon className="h-5 w-5" />}
                 />
               </div>
             </div>
           </div>
-        </CardHeader>
+        </div>
 
-        <CardBody className="overflow-scroll px-0">
+        <div className="overflow-scroll px-0">
           <table className="w-full min-w-max table-auto text-left">
             <thead>
               <tr>
@@ -162,28 +123,22 @@ const TransactionHistoryComponent = ({ user }) => {
                     key={head}
                     className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
                   >
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal leading-none opacity-70"
+                    <div
+                      className="font-bold leading-none opacity-70"
                     >
                       {head}
-                    </Typography>
+                    </div>
                   </th>
                 ))}
               </tr>
             </thead>
 
-            <tbody>
+            <tbody className="font-bold">
               {renderTableRows()}
             </tbody>
           </table>
-          <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-            <Button variant="outlined" size="sm">Previous</Button>
-            <Button variant="outlined" size="sm">Next</Button>
-          </CardFooter>
-        </CardBody>
-      </Card >
+        </div>
+      </div >
     </>
   )
 }
