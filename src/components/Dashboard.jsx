@@ -111,7 +111,7 @@ const Dashboard = ({ user, accountInfo }) => {
         </div>
 
         <div className="bg-blue-100 rounded-md col-span-7 row-span-2 col-start-2 row-start-5 mt-4">
-          <div className="overflow-scroll">
+          <div>
             <h2 className="flex justify-center text-2xl font-extrabold">Transaction History</h2>
             <table className="table-auto w-full">
               <thead className="bg-blue-gray-50/50">
@@ -145,7 +145,6 @@ const Dashboard = ({ user, accountInfo }) => {
           {/* Content for col 9, row 5 */}
         </div>
       </div>
-
 
       {/*
 

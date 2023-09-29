@@ -109,7 +109,7 @@ const TransactionHistoryComponent = ({ user }) => {
           </div>
         </div>
 
-        <div className="overflow-scroll px-0">
+        <div className="px-0 w-full">
           <table className="w-full min-w-max table-auto text-left">
             <thead>
               <tr>
