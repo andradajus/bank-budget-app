@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const BudgetTracker = ({ user, updateBalances, addTransactionToHistory, showAlert, updateSavingsBalance }) => {
+const BudgetTracker = ({ user, updateBalances, addTransactionToHistory, showAlert}) => {
   const [expenses, setExpenses] = useState([]);
   const [newExpenseName, setNewExpenseName] = useState('');
   const [newExpenseAmount, setNewExpenseAmount] = useState('');
@@ -11,28 +11,28 @@ const BudgetTracker = ({ user, updateBalances, addTransactionToHistory, showAler
   const updatedAccounts = JSON.parse(localStorage.getItem('accounts')) || [];
   const userAccount = updatedAccounts.find(account => account.bankNumberS === user.bankNumberS);
 
-  useEffect(() => {
-    const sum = expenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
-    setTotalAmount(sum);
-  }, [expenses]);
-
   const updateBalance = (amount) => {
     const updatedAccountsAfterExpense = updatedAccounts.map(account => {
       if (account.bankNumberS === user.bankNumberS) {
-        account.balanceSavings -= amount;
+        account.balanceSavings -= parseFloat(amount);
       }
       return account;
     });
     localStorage.setItem('accounts', JSON.stringify(updatedAccountsAfterExpense));
-    updateSavingsBalance((prevBalance) => prevBalance - parseFloat(amount));
+    return user.balanceSavings - parseFloat(amount);
   };
 
   const handleAddExpense = () => {
     if (newExpenseName !== '' && newExpenseAmount !== '') {
       const expenseAmount = parseFloat(newExpenseAmount);
+  
+      const updatedSavings = updateBalance(expenseAmount);
+  
+
+      updateBalances(updatedSavings, user.balanceChecking);
+  
       const newExpense = { name: newExpenseName, amount: expenseAmount };
       setExpenses([...expenses, newExpense]);
-      updateBalance(newExpenseAmount);
       setNewExpenseName('');
       setNewExpenseAmount('');
     }
@@ -56,7 +56,6 @@ const BudgetTracker = ({ user, updateBalances, addTransactionToHistory, showAler
 
    const handleSubmit = () => {
     if (userAccount) {
-      localStorage.setItem('accounts', JSON.stringify(updatedAccounts));
       updateBalances(userAccount.balanceSavings);
     }
 
@@ -72,6 +71,8 @@ const BudgetTracker = ({ user, updateBalances, addTransactionToHistory, showAler
 
     addTransactionToHistory(transaction, user.bankNumberS);
     showAlert('Payment Successful', 'success');
+    setNewExpenseName('');
+    setNewExpenseAmount('');
     setExpenses([]);
   };
 

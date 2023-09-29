@@ -46,11 +46,11 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory,
         return;
       } else {
         senderAccount.accountType = 'Checking';
-        senderAccount.balanceChecking = (senderBalance - parseFloat(amount)).toFixed(2);
+        senderAccount.balanceChecking = senderBalance - parseFloat(amount);
       }
     } else {
       senderAccount.accountType = 'Savings';
-      senderAccount.balanceSavings = (senderBalance - parseFloat(amount)).toFixed(2);
+      senderAccount.balanceSavings = senderBalance - parseFloat(amount);
     }
   
     const recipientAcc = accounts.find((account) => account.bankNumberS === recipientAccount);
@@ -75,13 +75,13 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory,
     setTransactionHistory(updatedTransactionHistory);
     localStorage.setItem('transactionHistory', JSON.stringify(updatedTransactionHistory));
     addTransactionToHistory(transaction, user.bankNumberS, recipientAccount);
-    recipientAcc.balanceSavings = (parseFloat(recipientAcc.balanceSavings) + parseFloat(amount)).toFixed(2);
+    recipientAcc.balanceSavings = parseFloat(recipientAcc.balanceSavings) + parseFloat(amount);
     localStorage.setItem('accounts', JSON.stringify(accounts));
-    updateBalances(
-    parseFloat(senderAccount.balanceSavings.toLocaleString()).toFixed(2),
-    parseFloat(senderAccount.balanceChecking.toLocaleString()).toFixed(2)
-    );
     showAlert('Transfer Successful', 'success')
+    updateBalances(
+      parseFloat(senderAccount.balanceSavings).toFixed(2),
+      parseFloat(senderAccount.balanceChecking).toFixed(2)
+      );
     setShowSuccessPage(true)
   };
     
