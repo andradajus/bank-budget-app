@@ -30,11 +30,12 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory, showAlert }) 
       type: "Add Funds"
     };
 
-    const updatedBalance = user.balanceSavings + amount;
-    updateBalances(updatedBalance);
+
+    
     addTransactionToHistory(transaction, user.bankNumberS, null);
     setAmount(0);
     setShowSuccessPage(true)
+    updateBalances(userAccount.balanceSavings);
     showAlert('Add funds successful', 'success')
   };
 

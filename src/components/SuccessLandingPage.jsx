@@ -21,8 +21,8 @@ const SuccessLandingPage = () => {
   }, []);
 
   return (
-  <div className="bg-blue-100 pb-20 cursor-wait h-full">
-    <div className="text-center content-center">
+  <div className="bg-blue-100 pb-20 cursor-wait h-full rounded-md shadow-md">
+    <div className="text-center content-center justify-center">
       <div className="mb-8 text-2xl font-bold ">Transaction Successful</div>
       <div className="inline-block">
       <Spinner className="h-12 w-12" />

@@ -27,7 +27,7 @@ const TransactionHistoryComponent = ({ user }) => {
         const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
         return (
-          <tr key={index}>
+          <tr className="border-2 bg-gray-200 rounded-md shadow-md hover:rounded-md hover:scale-105 hover:break-normal ease-in-out duration-300" key={index}>
             <td className={classes}>
               <div className="flex items-center gap-3">
                 <div
@@ -84,12 +84,12 @@ const TransactionHistoryComponent = ({ user }) => {
   return (
 
     <>
-      <div className="h-full w-full rounded-md bg-blue-100 p-2 overflow-scroll">
+      <div className="h-full w-full rounded-md shadow-md bg-gray-50 p-4 overflow-auto">
         <div className="rounded-none">
           <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
             <div>
-              <p>
-                Recent Transactions
+              <p className="2xl font-bold">
+                Transaction History
               </p>
 
               <p className="mt-1 font-normal">
@@ -112,14 +112,14 @@ const TransactionHistoryComponent = ({ user }) => {
         <div className="px-0 w-full">
           <table className="w-full min-w-max table-auto text-left">
             <thead>
-              <tr>
+              <tr className="rounded-md">
                 {TABLE_HEAD.map((head) => (
                   <th
                     key={head}
-                    className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                    className="border-y border-blue-gray-100 bg-blue-500 p-4"
                   >
                     <div
-                      className="font-bold leading-none opacity-70"
+                      className="font-bold leading-none text-white"
                     >
                       {head}
                     </div>

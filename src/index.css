@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities"; 
+@import "tw-elements-react/dist/css/tw-elements-react.min.css";
 
 html, body {
     height: 100%;
