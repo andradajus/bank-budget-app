@@ -15,6 +15,7 @@
     "@material-tailwind/react": "^2.1.2",
     "axios": "^1.5.1",
     "date-fns": "^2.30.0",
+    "flag-icons": "^6.11.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "postcss-cli": "^10.1.0",

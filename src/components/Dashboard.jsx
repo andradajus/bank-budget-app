@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import SideBar from './SideBar'
 import { Routes, Route } from 'react-router-dom'
 import AccountBalance from './Dashboard/AccountBalance'
-import EnrollAccount from './Dashboard/EnrollAccount'
 import FundTransfer from './Dashboard/FundTransfer'
 import AlertComponent from './AlertBox.jsx'
 import DashboardHome from './Dashboard/Home'
@@ -12,6 +11,7 @@ import BudgetTracker from './Dashboard/BudgetTracker'
 import TransactionHistoryComponent from './Dashboard/TransactionHistory'
 import MyProfile from './Dashboard/MyProfile'
 import ExchangeRate from './Dashboard/ExchangeRate'
+import VirtualCard from './Dashboard/VirtualCard'
 
 const Dashboard = ({ user, accountInfo }) => {
   const navigate = useNavigate()
@@ -102,15 +102,15 @@ const Dashboard = ({ user, accountInfo }) => {
           <Routes>
             <Route path="/my-profile" element={<MyProfile user={user} accountInfo={accountInfo} balances={balances} showAlert={showAlert} />} />
             <Route path="/account-balance" element={<AccountBalance user={user} accountInfo={accountInfo} balances={balances} showAlert={showAlert} />} />
-            <Route path="/enroll-account" element={<EnrollAccount user={user} showAlert={showAlert} />} />
             <Route path="/transaction-history" element={<TransactionHistoryComponent user={user} showAlert={showAlert} />} />
             <Route path="/add-funds" element={<AddFunds user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} showAlert={showAlert} />} />
+            <Route path="/virtual-card" element={<VirtualCard user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} showAlert={showAlert} />} />
             <Route path="/fund-transfer" element={<FundTransfer user={user} accountInfo={accountInfo} updateBalances={updateBalances} balances={balances} addTransactionToHistory={addTransactionToHistory} showAlert={showAlert} />} />
             <Route index element={<DashboardHome user={user} accountInfo={accountInfo} balances={balances} showAlert={showAlert} />} />
           </Routes>
         </div>
 
-        <div className="col-span-7 row-span-2 col-start-2 row-start-5 mt-4">
+        <div className="col-span-7 row-span-2 col-start-2 row-start-5 mt-6">
           <div className="bg-gray-50 rounded-md shadow-md h-64">
             <span className="flex justify-center font-bold text-xl">Recent Transactions</span>
             <table className="table-auto w-full">
@@ -146,12 +146,11 @@ const Dashboard = ({ user, accountInfo }) => {
           setBalances={setBalances} />
         </div>
 
-        <div className="bg-pink-200 col-span-4 row-span-2 col-start-9 row-start-5">
+        <div className="col-span-4 row-span-2 col-start-9 row-start-5">
           <ExchangeRate />
         </div>
       </div>
     </>
   )
 }
-
 export default Dashboard

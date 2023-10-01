@@ -1,12 +1,12 @@
 
 import { useState } from 'react'
 
-function SelectCountry({ country, onChange, showAlert }) {
+function SelectCountry({ country, onChange, showAlert, value }) {
     const [countryWarning, setCountryWarning] = useState('')
 
     const handleCountryChange = (e) => {
     const selectedCountry = e.target.value
-    onChange(e)
+    onChange(selectedCountry)
       
           if (selectedCountry !== 'PH') {
             showAlert('Your country is not supported yet', 'error')
@@ -22,7 +22,7 @@ function SelectCountry({ country, onChange, showAlert }) {
     label="Country"
     id="selectcountry"
     required
-    value={country}
+    value={value}
     onChange={handleCountryChange}
 >
     <option selected id="selectcountry" className="italic">Choose a country</option>

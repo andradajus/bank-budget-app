@@ -55,7 +55,7 @@ const Login = (props) => {
           <small className="flex justify-center italic mb-2">"Where Every Transaction is a Function Call"</small>
           </div>
       <div className="bg-gradient-to-l from-blue-300 via-blue-200 to-blue-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <Input className="bg-white" label="Usename" type="text" value={username} onChange={onChangeUsername} />
+        <Input className="bg-white" label="Username" type="text" value={username} onChange={onChangeUsername} />
       </div>
       
       <div className="bg-gradient-to-l from-blue-300 via-blue-200 to-blue-100 shadow-md rounded px-8 pt-6 pb-8 mb-4" >

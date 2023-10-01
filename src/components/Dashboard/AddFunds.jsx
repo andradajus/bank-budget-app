@@ -48,14 +48,17 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory, showAlert }) 
       {showSuccessPage ? (
         <SuccessLandingPage user={user} />
       ) : (
-        <form className="flex justify-center mt-1 ml-1 ">
+      <div className="flex flex-col justify-between h-full">
+        <form className="flex justify-center mt-1 ml-1">
+        
           <div>
+          <p className=" bg-blue-100 shadow-md rounded-md mt-2 mb-2 flex justify-center text-3xl font-bold">Add Funds</p>
             <div className="flex flex-col">
             <div className="flex flex-col justify-center bg-blue-100 rounded-md p-3">
               <div className="flex justify-center font-semibold text-white text-2xl lining-nums bg-blue-900 rounded-md">&#x20B1;{amount}</div>
             </div>
 
-              <div className="flex flex-col bg-blue-100 rounded-md mt-2">
+              <div className="flex flex-col bg-blue-100 rounded-md mt-2 pb-2">
                 <div className="flex justify-center mb-2 text-m font-medium text-gray-900 dark:text-white">Choose an Amount</div>
                 <div className="flex justify-around">
                   <ButtonClass text="1" onClick={() => handleAddFunds(1)} />
@@ -97,6 +100,12 @@ const AddFunds = ({ user, updateBalances, addTransactionToHistory, showAlert }) 
             </div>
           </div>
         </form>
+        
+        <span className=" flex text-xs italic"> Please exercise caution while utilizing the 'Add Funds' 
+          feature. Ensure that the source and amount of funds align with your 
+          financial intentions. Your vigilance is appreciated in maintaining the
+           integrity of your account."</span>
+        </div>
       )}
     </>
   );

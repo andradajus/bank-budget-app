@@ -2,6 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities"; 
 @import "tw-elements-react/dist/css/tw-elements-react.min.css";
+@import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 html, body {
     height: 100%;
@@ -22,3 +23,11 @@ html, body {
   main {
     flex: 1;
   }
+
+  .hover-show {
+    visibility: visible;
+}
+
+.hover-hide {
+    visibility: hidden;
+}

@@ -156,8 +156,8 @@ const RegistrationForm = ({ handleNewUserRegistration, showAlert, month, day, ye
 
   return (
     <>
-      <div className="flex justfiy-center content-center m-3">
-        <form className="flex flex-col bg-gradient-to-l from-blue-200 via-blue-100 to-blue-300 p-6 rounded w-4/5 mx-auto min-h" onSubmit={handleSubmit}>
+      <div className=" flex justfiy-center content-center m-3">
+        <form className="flex flex-col bg-gradient-to-l from-blue-200 via-blue-100 to-blue-300 p-6 rounded mx-auto min-h" onSubmit={handleSubmit}>
           <div className="flex align-center justify-center rounded leading-normal text-3xl md:text font-bold pb-4">Register an Account</div>
 
           <div className="bg-white shadow-md rounded p-5 mb-4 flex w-full justify-between">
@@ -188,9 +188,8 @@ const RegistrationForm = ({ handleNewUserRegistration, showAlert, month, day, ye
           </div>
 
           <div className="bg-white shadow-md rounded p-4 mb-3 flex w-full justify-between flex-row">
-            <div>
+            <div className="mr-2">
               <Input
-                size="lg"
                 type="text"
                 label="First Name"
                 id="firstName"
@@ -200,7 +199,7 @@ const RegistrationForm = ({ handleNewUserRegistration, showAlert, month, day, ye
               />
             </div>
 
-            <div>
+            <div className="mr-2">
               <Input
                 type="text"
                 label="Middle Name"
@@ -228,7 +227,7 @@ const RegistrationForm = ({ handleNewUserRegistration, showAlert, month, day, ye
               <SelectBirthday
                 onChange={handleBirthDateChange} />
             </div>
-            <div><SelectCountry value={selectCountry} onChange={handleCountryChange} showAlert={showAlert} /></div>
+            <div><SelectCountry value={selectCountry} onChange={setCountry} showAlert={showAlert} /></div>
           </div>
 
           <div className="bg-white shadow-md rounded p-4 mb-3 flex w-full justify-between">
