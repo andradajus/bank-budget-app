@@ -172,6 +172,29 @@ const BudgetTracker = ({
             Submit
           </button>
           </div>
+          <div>
+            <ul className="ml-2 mt-2 text-xs italic">
+
+          <li>
+              Input your expense details and the amount in the respective
+              fields.
+            </li>
+            <li>
+              Make sure you've filled out both the expense details and the
+              amount.
+            </li>
+            <li>
+              You can add as many expenses as you want.
+            </li>
+            <li>
+              Your balance will be deducted upon adding expenses but will not
+              be finalized until you submit.
+            </li>
+            <li>
+              Your transactions will be saved in the transaction history.
+            </li>
+          </ul>
+          </div>
         </div>
       </div>
     </div>

@@ -134,7 +134,7 @@ const VirtualCard = ({ user }) => {
                         Generate Card
                     </button>
                 )}
-            <ul className="mt-7">
+            <ul className="mt-5">
             <span className="font-bold">Note:</span>
             <li className="italic text-sm">
        Hover on the CVV area to show CVV number

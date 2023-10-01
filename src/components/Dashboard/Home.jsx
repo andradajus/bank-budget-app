@@ -147,6 +147,48 @@ export function AccordionCustomStyles() {
         </AccordionBody>
         
       </Accordion>
+
+      <Accordion
+        open={open === 4}
+        className="mb-2 rounded-md shadow-md border border-blue-gray-200 px-4"
+      >
+        <AccordionHeader
+          onClick={() => handleOpen(4)}
+          className={`border-b-0 transition-colors ${
+            open === 2 ? "text-blue-500 hover:!text-blue-700" : ""
+          }`}
+        >
+          Dependencies
+        </AccordionHeader>
+        <AccordionBody className="pt-0 text-base font-normal">
+        <ul className="text-black list-disc list-inside dark:text-gray-400">
+            <li className="text-sm">
+              Flag Icons
+              <ul className="text-xs pl-5 mt-1 space-y-1 list-inside">
+                <li className="">Used on Currency Exchange Flag Icons</li>
+              </ul>
+            </li>
+
+            <li className="text-sm mt-1">
+              Tailwind CSS
+              <ul className="text-xs pl-5 mt-1 space-y-1 list-inside">
+                <li className="">Base CSS</li>
+                <li className="">Material Tailwind - Used mainly on Input and Accordion</li>
+              </ul>
+            </li>
+
+            <li className="text-sm mt-1">
+              Axios
+              <ul className="text-xs pl-5 mt-1 space-y-1 list-inside">
+                <li className="">API Fetch Library for fetching latest current exchange rate</li>
+              </ul>
+            </li>
+
+
+          </ul>
+        </AccordionBody>
+        
+      </Accordion>
     </div>
     </>
   );
