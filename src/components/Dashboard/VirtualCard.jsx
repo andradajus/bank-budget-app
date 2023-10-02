@@ -137,7 +137,7 @@ const VirtualCard = ({ user }) => {
             <ul className="mt-5">
             <span className="font-bold">Note:</span>
             <li className="italic text-sm">
-       Hover on the CVV area to show CVV number
+       Hover on the CVV area to show CVV numbernpm ru
     </li>
             <li className="italic text-sm">
             This virtual card is exclusively valid for a single transaction and 

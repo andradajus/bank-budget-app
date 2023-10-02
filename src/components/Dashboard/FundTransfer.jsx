@@ -27,6 +27,7 @@ const FundTransfer = ({ user, updateBalances, balances, addTransactionToHistory,
     }));
   }, [user]);
 
+
   const handleWithdraw = () => {
     const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
     const senderAccount = accounts.find(account => account.bankNumberS === user.bankNumberS);

@@ -11,6 +11,8 @@ const AccountBalance = ({ user, balances, updateBalances }) => {
     setCheckingBalance(balances.checking || 0);
   }, [balances]);
 
+
+  // test push
   return (
     <>
         {user && (
