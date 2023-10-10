@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import {MagnifyingGlassIcon} from "@heroicons/react/24/outline";
+import { Chip, Avatar,Input,} from "@material-tailwind/react";
 
 const TransactionHistoryComponent = ({ user }) => {
   const [transactionHistory, setTransactionHistory] = useState([]);
@@ -9,38 +11,132 @@ const TransactionHistoryComponent = ({ user }) => {
   }, []);
 
   const filterTransactions = (transaction) => {
-    if (!user) return false; 
+    if (!user) return false;
     const senderAccountNumber = transaction.senderAccountNumber;
     const recipientAccountNumber = transaction.recipientAccountNumber;
     return senderAccountNumber === user.bankNumberS || recipientAccountNumber === user.bankNumberS;
   };
 
-  return (
-    <>
-      <div className="">
-        <div className="flex justify-center text-2xl mb-4">Transaction History</div>
+  const filteredTransactions = transactionHistory.filter(filterTransactions);
 
-        <div className="flex flex-col">
-          {transactionHistory
-            .filter(filterTransactions)
-            .map((transaction, index) => (
-              <div key={index} className="flex justify-around mb-2">
-                <div className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
-          hover:border-blue-500 dark:bg-gray-700 dark:border-gray-600 ml-1
-          hover:placeholder-gray-400 hover:text-black hover:scale-110 ease-in-out dark:hover:ring-blue-500 dark:hover:border-blue-500 p-4 shadow-lg duration-300">
-                  <div>Transaction Number: {transaction.transactionNumber}</div>
-                  <div>Date: {transaction.date}</div>
-                  <div>Amount: {transaction.amount}</div>
-                  <div>Type: {transaction.type}</div>
-                  <div>Sender Account: {transaction.senderAccountNumber}</div>
-                  <div>Recipient Account: {transaction.recipientAccountNumber}</div>
+  const renderTableRows = () => {
+    return transactionHistory
+      .filter(filterTransactions)
+      .map((transaction, index) => {
+        const isLast = index === transactionHistory.length - 1;
+        const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+
+        return (
+          <tr className="border-2 bg-gray-200 rounded-md shadow-md hover:rounded-md hover:scale-105 hover:break-normal ease-in-out duration-300" key={index}>
+            <td className={classes}>
+              <div className="flex items-center gap-3">
+                <div
+                  className="text-sm"
+                >
+                  {transaction.date}
                 </div>
               </div>
-            ))}
+            </td>
+
+            <td className={classes}>
+              <div
+                className="text-center text-sm"
+              >
+                {transaction.transactionNumber}
+              </div>
+            </td>
+
+            <td className={classes}>
+              <div
+                className="text-sm"
+              >
+                &#x20B1;{transaction.amount}
+              </div>
+            </td>
+            <td className={classes}>
+              <div
+                className="text-sm"
+              >
+                {transaction.type}
+              </div>
+            </td>
+            <td className={classes}>
+              <div
+                className="text-sm"
+              >
+                {transaction.senderAccountNumber}
+              </div>
+            </td>
+            <td className={classes}>
+              <div
+                className="text-sm"
+              >
+                {transaction.recipientAccountNumber}
+              </div>
+            </td>
+          </tr>
+        )
+      })
+  }
+
+  const TABLE_HEAD = ["Date", "Transaction No.", "Amount", "Type", "Sender Account", "Recipient Account"]
+
+  return (
+
+    <>
+      <div className="h-full w-full rounded-md shadow-md bg-gray-50 p-4 overflow-auto">
+        <div className="rounded-none">
+          <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
+            <div>
+              <p className="2xl font-bold">
+                Transaction History
+              </p>
+
+              <p className="mt-1 font-normal">
+                These are details about the last transactions
+              </p>
+            </div>
+
+            <div className="flex w-full shrink-0 gap-2 md:w-max">
+              <div className="w-full md:w-72">
+                <Input
+                  className="bg-color-white"
+                  label="Search"
+                  icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+
+        <div className="px-0 w-full">
+          <table className="w-full min-w-max table-auto text-left">
+            <thead>
+              <tr className="rounded-md">
+                {TABLE_HEAD.map((head) => (
+                  <th
+                    key={head}
+                    className="border-y border-blue-gray-100 bg-blue-500 p-4"
+                  >
+                    <div
+                      className="font-bold leading-none text-white"
+                    >
+                      {head}
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+
+            <tbody className="font-bold">
+              {renderTableRows()}
+            </tbody>
+          </table>
+        </div>
+      </div >
     </>
-  );
-};
+  )
+}
+
 
 export default TransactionHistoryComponent;

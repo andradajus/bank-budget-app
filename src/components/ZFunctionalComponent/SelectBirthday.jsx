@@ -1,24 +1,32 @@
+import { useState, useEffect } from "react";
 
-function SelectBirthday({ birthDate, onChange, month, day, year}) {
-    const handleBirthDateChange = (e) => {
-    const selectedBirthdate = e.target.value
-    onChange(e)
-      }
+function SelectBirthday({ onChange}) {
+    const [month, setMonth] = useState(''); 
+    const [day, setDay] = useState(''); 
+    const [year, setYear] = useState(''); 
+    
+    const handleBirthDateChange = () => {
+        const formattedDate = `${month} ${day}, ${year}`;
+        onChange(formattedDate);
+      };
+    useEffect(() => {
+        console.log('Selected Birthdate-SB Component:', `${month} ${day}, ${year}`);
+    }, [month, day, year]);
 
-    return (  
-        <> 
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Birth Date<span className="text-red-600">*</span></label>  
-        <div className="flex flex-row">
-            <select
+    return (
+        <>
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Birth Date<span className="text-red-600">*</span></label>
+            <div className="flex flex-row">
+                <select
                     className=" flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                     focus:ring-blue-500 focus:border-blue-500 w-auto p-2.5 dark:bg-gray-700
                      dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-                      dark:focus:ring-blue-500 dark:focus:border-blue-500"               
+                      dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="text"
                     label="month"
                     id="month"
                     value={month}
-                    onChange={handleBirthDateChange}
+                    onChange={(e) => setMonth(e.target.value)}                 
                     required
                 >   <option selected>Month</option>
                     <option>January</option>
@@ -34,16 +42,16 @@ function SelectBirthday({ birthDate, onChange, month, day, year}) {
                     <option>November</option>
                     <option>December</option>
                 </select>
-                    <select
+                <select
                     className="flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                     focus:ring-blue-500 focus:border-blue-500 w-auto p-2.5 dark:bg-gray-700
                      dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-                      dark:focus:ring-blue-500 dark:focus:border-blue-500"                                    
+                      dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="text"
                     label="day"
                     id="day"
                     value={day}
-                    onChange={handleBirthDateChange}
+                    onChange={(e) => setDay(e.target.value)} 
                     required
                 >   <option selected>Day</option>
                     <option>1</option>
@@ -77,17 +85,17 @@ function SelectBirthday({ birthDate, onChange, month, day, year}) {
                     <option>29</option>
                     <option>30</option>
                     <option>31</option>
-                    </select>
-                    <select
-                   className="flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                </select>
+                <select
+                    className="flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                    focus:ring-blue-500 focus:border-blue-500 w-auto p-2.5 dark:bg-gray-700
                     dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-                     dark:focus:ring-blue-500 dark:focus:border-blue-500"                                                       
+                     dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="text"
                     label="year"
                     id="year"
                     value={year}
-                    onChange={handleBirthDateChange}
+                    onChange={(e) => setYear(e.target.value)}
                     required
                 >   <option selected>Year</option>
                     <option value="2019">2023</option>
@@ -208,10 +216,10 @@ function SelectBirthday({ birthDate, onChange, month, day, year}) {
                     <option value="1907">1907</option>
                     <option value="1906">1906</option>
                     <option value="1905">1905</option>
-                    </select>
-                    </div>
+                </select>
+            </div>
         </>
-        
+
     )
 }
 
