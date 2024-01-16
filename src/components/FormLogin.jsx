@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import logoBG from './ZFunctionalComponent/Icons/cbname.png'
+import {Input} from "@material-tailwind/react";
+
 
 const Login = (props) => {
   const { setCurrentPage, setLoggedInUser } = props
@@ -53,13 +55,11 @@ const Login = (props) => {
           <small className="flex justify-center italic mb-2">"Where Every Transaction is a Function Call"</small>
           </div>
       <div className="bg-gradient-to-l from-blue-300 via-blue-200 to-blue-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <label className="flex text-gray-700 text-sm font-bold mb-2">Username</label>
-        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value={username} onChange={onChangeUsername} />
+        <Input className="bg-white" label="Username" type="text" value={username} onChange={onChangeUsername} />
       </div>
       
       <div className="bg-gradient-to-l from-blue-300 via-blue-200 to-blue-100 shadow-md rounded px-8 pt-6 pb-8 mb-4" >
-        <label className="flex text-gray-700 text-sm font-bold mb-2">Password</label>
-        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" value={password} onChange={onChangePassword} />
+        <Input className="bg-white" label="Password" type="password" value={password} onChange={onChangePassword} />
       </div>
       
       <div className="flex items-center justify-between">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from 'react-router-dom'
+import { Spinner } from "@material-tailwind/react";
 
 const SuccessLandingPage = () => {
   const [countdown, setCountdown] = useState(8);
@@ -20,13 +21,11 @@ const SuccessLandingPage = () => {
   }, []);
 
   return (
-  <div className="bg-blue-100 pb-20 cursor-wait">
-    <div className="text-center mt-20">
-      <div className="mb-8 text-2xl font-bold">Transaction Successful</div>
+  <div className="bg-blue-100 pb-20 cursor-wait h-full rounded-md shadow-md">
+    <div className="text-center content-center justify-center">
+      <div className="mb-8 text-2xl font-bold ">Transaction Successful</div>
       <div className="inline-block">
-        <div
-          className="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin"
-        ></div>
+      <Spinner className="h-12 w-12" />
       </div>
       <div className="mt-8">Redirecting in {countdown} seconds</div>
     </div>
